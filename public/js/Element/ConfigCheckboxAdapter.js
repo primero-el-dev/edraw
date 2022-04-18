@@ -1,7 +1,0 @@
-import ConfigInputAdapterTemplate from "./ConfigInputAdapterTemplate.js";
-export default class ConfigInputAdapter extends ConfigInputAdapterTemplate {
-    setValueFromElement() {
-        this.value = this.input.checked;
-    }
-}
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiQ29uZmlnQ2hlY2tib3hBZGFwdGVyLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiLi4vLi4vLi4vc3JjL0VsZW1lbnQvQ29uZmlnQ2hlY2tib3hBZGFwdGVyLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sMEJBQTBCLE1BQU0saUNBQWlDLENBQUM7QUFFekUsTUFBTSxDQUFDLE9BQU8sT0FBTyxrQkFBbUIsU0FBUSwwQkFBMEI7SUFFOUQsbUJBQW1CO1FBRTNCLElBQUksQ0FBQyxLQUFLLEdBQUcsSUFBSSxDQUFDLEtBQUssQ0FBQyxPQUE0QixDQUFBO0lBQ3RELENBQUM7Q0FDRiJ9
