@@ -1,0 +1,24 @@
+{
+  "name": "paint",
+  "version": "1.0.0",
+  "description": "paint app with various options",
+  "main": "./dist/tsc/main.js",
+  "author": "Przemysław Krogulski",
+  "license": "MIT",
+  "scripts": {
+    "watch": "tsc -p tsconfig.json -w",
+    "serve": "cd public && web-dev-server --node-resolve --watch --open --app-index index.html"
+  },
+  "dependencies": {
+    "@types/node": "^17.0.23",
+    "amd-loader": "^0.0.8",
+    "express": "^4.17.3",
+    "font-awesome": "^4.7.0",
+    "jquery": "^3.6.0",
+    "typescript": "^4.6.3"
+  },
+  "devDependencies": {
+    "@web/dev-server": "^0.1.30",
+    "jest": "^27.5.1"
+  }
+}
