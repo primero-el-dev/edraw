@@ -4,7 +4,7 @@
   "description": "paint app with various options",
   "main": "./dist/tsc/main.js",
   "author": "Przemysław Krogulski",
-  "license": "MIT",
+  "license": "SEE LICENCE IN LICENCE",
   "scripts": {
     "watch": "tsc -p tsconfig.json -w",
     "serve": "cd public && web-dev-server --node-resolve --watch --open --app-index index.html"
