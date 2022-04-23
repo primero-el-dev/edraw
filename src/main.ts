@@ -5,6 +5,7 @@ import DrawActionButton from "./Element/Button/DrawActionButton.js";
 import ConfigPanel from "./Element/ConfigPanel.js";
 import ConfigFactory from './Config/ConfigFactory.js';
 import ConfigContainer from "./Config/ConfigContainer.js";
+import DefaultValueFunctionInterpreter from "./Dsl/Interpreter/DefaultValueFunctionInterpreter.js";
 
 function getByIdOrThrowError(elementId: string): HTMLElement
 {
@@ -17,6 +18,9 @@ function getByIdOrThrowError(elementId: string): HTMLElement
 }
 
 try {
+    let interpreter = new DefaultValueFunctionInterpreter()
+    interpreter.interpret('2 * s', {s: 2})
+
     const buttonPanel = getByIdOrThrowError('buttonPanel')
     const mainCanvas = getByIdOrThrowError('mainCanvas') as HTMLCanvasElement
     const configPanelElement = getByIdOrThrowError('configPanel')
@@ -36,6 +40,8 @@ try {
     buttonPanel.append(actionButtonFactory.createPolygonBrushButton().getButtonElement())
     buttonPanel.append(actionButtonFactory.createRotatingPencilButton().getButtonElement())
     buttonPanel.append(actionButtonFactory.createBungeePencilButton().getButtonElement())
+    buttonPanel.append(actionButtonFactory.createAdvancedPencilButton().getButtonElement())
+    buttonPanel.append(actionButtonFactory.createAdvancedPolygonBrushButton().getButtonElement())
     buttonPanel.append(actionButtonFactory.createExportButton().getButtonElement())
     pencilButton.getButtonElement().click()
 

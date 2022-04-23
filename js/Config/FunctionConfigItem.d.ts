@@ -5,4 +5,6 @@ import InterpreterInterface from "../Dsl/Interpreter/InterpreterInterface.js";
 export default class FunctionConfigItem extends ConfigItem {
     protected interpreter: InterpreterInterface;
     constructor(propertyName: string, label: string, input: GetHtmlElementInterface & GetValueInterface, interpreter: InterpreterInterface);
+    getElementWithValue(): HTMLElement;
+    getValue(): string;
 }

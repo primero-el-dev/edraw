@@ -27,4 +27,11 @@ export default class ConfigFactory {
     static createStripedLineConfig(): ConfigItem;
     static createStripeLineLengthConfig(): ConfigItem;
     static createStripeGapLengthConfig(): ConfigItem;
+    static createLineWidthFunctionConfig(): ConfigItem;
+    static createColorFunctionEnabledConfig(): ConfigItem;
+    static createRedValueFunctionConfig(): ConfigItem;
+    static createGreenValueFunctionConfig(): ConfigItem;
+    static createBlueValueFunctionConfig(): ConfigItem;
+    static createOpacityFunctionConfig(): ConfigItem;
+    static createElementDiameterFunctionConfig(): ConfigItem;
 }

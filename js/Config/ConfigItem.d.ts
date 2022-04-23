@@ -29,6 +29,13 @@ export default class ConfigItem {
     static readonly STRIPED_LINE_PROPERTY = "striped_line";
     static readonly STRIPE_LINE_LENGTH_PROPERTY = "stripe_line_length";
     static readonly STRIPE_GAP_LENGTH_PROPERTY = "stripe_gap_length";
+    static readonly LINE_WIDTH_FUNCTION_PROPERTY = "line_width_function";
+    static readonly COLOR_FUNCTION_ENABLED_PROPERTY = "color_function_enabled";
+    static readonly RED_VALUE_FUNCTION_PROPERTY = "red_value_function";
+    static readonly GREEN_VALUE_FUNCTION_PROPERTY = "green_value_function";
+    static readonly BLUE_VALUE_FUNCTION_PROPERTY = "blue_value_function";
+    static readonly OPACITY_FUNCTION_PROPERTY = "opacity_function";
+    static readonly ELEMENT_DIAMETER_FUNCTION_PROPERTY = "element_diameter_function";
     constructor(propertyName: string, label: string, input: GetHtmlElementInterface & GetValueInterface);
     getPropertyName(): string;
     getElementWithValue(): HTMLElement;

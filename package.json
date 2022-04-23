@@ -7,7 +7,8 @@
   "license": "SEE LICENCE IN LICENCE",
   "scripts": {
     "watch": "tsc -p tsconfig.json -w",
-    "serve": "cd public && web-dev-server --node-resolve --watch --open --app-index index.html"
+    "serve": "cd public && web-dev-server --node-resolve --watch --open --app-index index.html",
+    "test": "jest"
   },
   "dependencies": {
     "@types/node": "^17.0.23",
@@ -18,7 +19,10 @@
     "typescript": "^4.6.3"
   },
   "devDependencies": {
+    "@types/jest": "^27.4.1",
     "@web/dev-server": "^0.1.30",
-    "jest": "^27.5.1"
+    "jest": "^27.5.1",
+    "ts-jest": "^27.1.4",
+    "ts-node": "^10.7.0"
   }
 }

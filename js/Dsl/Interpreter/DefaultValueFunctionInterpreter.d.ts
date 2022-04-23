@@ -1,7 +1,7 @@
-import InterpreterInterface from "./InterpreterInterface";
+import InterpreterInterface from "./InterpreterInterface.js";
 import PropertyMap from "./PropertyMap.js";
+import ValueMap from "./ValueMap.js";
 export default class DefaultValueFunctionInterpreter implements InterpreterInterface {
-    protected propertyMap: PropertyMap;
-    constructor(propertyMap: PropertyMap);
-    interpret(input: string): void | never;
+    static readonly DEFAULT_PROPERTY_MAP: PropertyMap;
+    interpret(input: string, valueMap: ValueMap): number;
 }

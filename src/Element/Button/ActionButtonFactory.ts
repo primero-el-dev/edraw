@@ -13,6 +13,8 @@ import ExportButton from "./ExportButton.js";
 import PolygonBrushButton from "./PolygonBrushButton.js";
 import RotatingPencilButton from "./RotatingPencilButton.js";
 import BungeePencilButton from "./BungeePencilButton.js";
+import AdvancedPencilButton from "./AdvancedPencilButton.js";
+import AdvancedPolygonBrushButton from "./AdvancedPolygonBrushButton.js";
 
 export default class ActionButtonFactory
 {
@@ -158,6 +160,47 @@ export default class ActionButtonFactory
         ])
 
         return new BungeePencilButton(button, this.canvas, newContainer, this.configPanel)
+    }
+
+    public createAdvancedPencilButton(): AdvancedPencilButton
+    {
+        let button = HTMLElementFactory.createActionButton('advanced pencil', 'advanced pencil')
+        let newContainer = this.configContainer.getWithProperties([
+            ConfigItem.LINE_WIDTH_FUNCTION_PROPERTY,
+            ConfigItem.COLOR_PROPERTY,
+            ConfigItem.OPACITY_PROPERTY,
+            ConfigItem.COLOR_FUNCTION_ENABLED_PROPERTY,
+            ConfigItem.RED_VALUE_FUNCTION_PROPERTY,
+            ConfigItem.GREEN_VALUE_FUNCTION_PROPERTY,
+            ConfigItem.BLUE_VALUE_FUNCTION_PROPERTY,
+            ConfigItem.OPACITY_FUNCTION_PROPERTY,
+        ])
+
+        return new AdvancedPencilButton(button, this.canvas, newContainer, this.configPanel)
+    }
+
+    public createAdvancedPolygonBrushButton(): AdvancedPolygonBrushButton
+    {
+        let button = HTMLElementFactory.createActionButton('advanced polygon brush', 'advanced polygon brush')
+        let newContainer = this.configContainer.getWithProperties([
+            ConfigItem.LINE_WIDTH_FUNCTION_PROPERTY,
+            ConfigItem.ELEMENT_DIAMETER_FUNCTION_PROPERTY,
+            ConfigItem.CONTOUR_PROPERTY,
+            ConfigItem.TOUCHES_PER_TICK_PROPERTY,
+            ConfigItem.BRUSH_AREA_DIAMETER_PROPERTY,
+            ConfigItem.ELEMENT_DIAMETER_PROPERTY,
+            ConfigItem.ELEMENT_ROTATION_PROPERTY,
+            ConfigItem.ELEMENT_EDGES_COUNT_PROPERTY,
+            ConfigItem.COLOR_PROPERTY,
+            ConfigItem.OPACITY_PROPERTY,
+            ConfigItem.COLOR_FUNCTION_ENABLED_PROPERTY,
+            ConfigItem.RED_VALUE_FUNCTION_PROPERTY,
+            ConfigItem.GREEN_VALUE_FUNCTION_PROPERTY,
+            ConfigItem.BLUE_VALUE_FUNCTION_PROPERTY,
+            ConfigItem.OPACITY_FUNCTION_PROPERTY,
+        ])
+
+        return new AdvancedPolygonBrushButton(button, this.canvas, newContainer, this.configPanel)
     }
 
     public createExportButton(): ExportButton

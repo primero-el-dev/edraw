@@ -11,6 +11,8 @@ import ExportButton from "./ExportButton.js";
 import PolygonBrushButton from "./PolygonBrushButton.js";
 import RotatingPencilButton from "./RotatingPencilButton.js";
 import BungeePencilButton from "./BungeePencilButton.js";
+import AdvancedPencilButton from "./AdvancedPencilButton.js";
+import AdvancedPolygonBrushButton from "./AdvancedPolygonBrushButton.js";
 export default class ActionButtonFactory {
     private canvas;
     private configContainer;
@@ -25,5 +27,7 @@ export default class ActionButtonFactory {
     createPolygonBrushButton(): PolygonBrushButton;
     createRotatingPencilButton(): RotatingPencilButton;
     createBungeePencilButton(): BungeePencilButton;
+    createAdvancedPencilButton(): AdvancedPencilButton;
+    createAdvancedPolygonBrushButton(): AdvancedPolygonBrushButton;
     createExportButton(): ExportButton;
 }

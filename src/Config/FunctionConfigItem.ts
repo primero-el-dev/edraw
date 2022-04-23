@@ -13,4 +13,14 @@ export default class FunctionConfigItem extends ConfigItem
     ) {
         super(propertyName, label, input)
     }
+
+    public getElementWithValue(): HTMLElement
+    {
+        return this.input.getElement()
+    }
+
+    public getValue(): string
+    {
+        return this.interpreter.interpret(this.input.getValue()) as string
+    }
 }

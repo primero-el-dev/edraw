@@ -44,7 +44,17 @@ export default class Color
 
     public toDecmalStringWithOpacity(opacity: number): string
     {
-        return `rgba(${this.red},${this.green},${this.blue},${opacity})`
+        return `rgba(${this.red},${this.green},${this.blue},${this.processOpacity(opacity)})`
+    }
+
+    protected processOpacity(opacity: number): number
+    {
+        if (opacity > 1) {
+            return 1;
+        } else if (opacity < 0) {
+            return 0
+        }
+        return opacity
     }
 
     protected stringifyColorValue(value: number): string

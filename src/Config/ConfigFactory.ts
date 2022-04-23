@@ -34,6 +34,13 @@ export default class ConfigFactory
             ConfigFactory.createStripedLineConfig(),
             ConfigFactory.createStripeLineLengthConfig(),
             ConfigFactory.createStripeGapLengthConfig(),
+            ConfigFactory.createLineWidthFunctionConfig(),
+            ConfigFactory.createColorFunctionEnabledConfig(),
+            ConfigFactory.createRedValueFunctionConfig(),
+            ConfigFactory.createGreenValueFunctionConfig(),
+            ConfigFactory.createBlueValueFunctionConfig(),
+            ConfigFactory.createOpacityFunctionConfig(),
+            ConfigFactory.createElementDiameterFunctionConfig(),
         ])
     }
 
@@ -235,5 +242,61 @@ export default class ConfigFactory
         let inputAdapter = new ConfigInputAdapter(input, ConfigItem.STRIPE_GAP_LENGTH_PROPERTY, '5')
 
         return new ConfigItem(ConfigItem.STRIPE_GAP_LENGTH_PROPERTY, 'Stripe gap length', inputAdapter)
+    }
+
+    public static createLineWidthFunctionConfig(): ConfigItem
+    {
+        let input = HTMLElementFactory.createInput('text')
+        let inputAdapter = new ConfigInputAdapter(input, ConfigItem.LINE_WIDTH_FUNCTION_PROPERTY, '5')
+
+        return new ConfigItem(ConfigItem.LINE_WIDTH_FUNCTION_PROPERTY, 'Line width function (from time)', inputAdapter)
+    }
+
+    public static createColorFunctionEnabledConfig(): ConfigItem
+    {
+        let input = HTMLElementFactory.createInput('checkbox')
+        let inputAdapter = new ConfigCheckboxAdapter(input, ConfigItem.COLOR_FUNCTION_ENABLED_PROPERTY, 'off')
+
+        return new ConfigItem(ConfigItem.COLOR_FUNCTION_ENABLED_PROPERTY, 'Color function enabled', inputAdapter)
+    }
+
+    public static createRedValueFunctionConfig(): ConfigItem
+    {
+        let input = HTMLElementFactory.createInput('text')
+        let inputAdapter = new ConfigInputAdapter(input, ConfigItem.RED_VALUE_FUNCTION_PROPERTY, '')
+
+        return new ConfigItem(ConfigItem.RED_VALUE_FUNCTION_PROPERTY, 'RGB red color value function (from time)', inputAdapter)
+    }
+
+    public static createGreenValueFunctionConfig(): ConfigItem
+    {
+        let input = HTMLElementFactory.createInput('text')
+        let inputAdapter = new ConfigInputAdapter(input, ConfigItem.GREEN_VALUE_FUNCTION_PROPERTY, '')
+
+        return new ConfigItem(ConfigItem.GREEN_VALUE_FUNCTION_PROPERTY, 'RGB green color value function (from time)', inputAdapter)
+    }
+
+    public static createBlueValueFunctionConfig(): ConfigItem
+    {
+        let input = HTMLElementFactory.createInput('text')
+        let inputAdapter = new ConfigInputAdapter(input, ConfigItem.BLUE_VALUE_FUNCTION_PROPERTY, '')
+
+        return new ConfigItem(ConfigItem.BLUE_VALUE_FUNCTION_PROPERTY, 'RGB blue color value function (from time)', inputAdapter)
+    }
+
+    public static createOpacityFunctionConfig(): ConfigItem
+    {
+        let input = HTMLElementFactory.createInput('text')
+        let inputAdapter = new ConfigInputAdapter(input, ConfigItem.OPACITY_FUNCTION_PROPERTY, '')
+
+        return new ConfigItem(ConfigItem.OPACITY_FUNCTION_PROPERTY, 'Opacity value function (from time)', inputAdapter)
+    }
+
+    public static createElementDiameterFunctionConfig(): ConfigItem
+    {
+        let input = HTMLElementFactory.createInput('text')
+        let inputAdapter = new ConfigInputAdapter(input, ConfigItem.ELEMENT_DIAMETER_FUNCTION_PROPERTY, '')
+
+        return new ConfigItem(ConfigItem.ELEMENT_DIAMETER_FUNCTION_PROPERTY, 'Element diameter function (from time)', inputAdapter)
     }
 }

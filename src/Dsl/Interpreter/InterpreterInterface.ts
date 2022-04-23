@@ -1,4 +1,6 @@
+import ValueMap from "./ValueMap.js";
+
 export default interface InterpreterInterface
 {
-    interpret(input: string): void|never
+    interpret(input: string, valueMap: ValueMap): any
 }

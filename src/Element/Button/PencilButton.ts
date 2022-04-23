@@ -39,7 +39,7 @@ export default class PencilButton extends DrawActionButton
                 this.target.ctx.lineWidth = this.configContainer.getLineWidth()
                 this.target.ctx.fillStyle = this.configContainer.getValueByProperty(ConfigItem.COLOR_PROPERTY)
                 this.target.ctx.strokeStyle = this.configContainer.getValueByProperty(ConfigItem.COLOR_PROPERTY)
-                this.target.ctx.lineCap = 'butt'
+                this.target.ctx.lineCap = 'round'
                 this.target.ctx.beginPath()
                 this.target.ctx.moveTo(this.lastX, this.lastY)
                 this.target.ctx.lineTo(e.offsetX, e.offsetY)
