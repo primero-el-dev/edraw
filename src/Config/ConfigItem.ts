@@ -35,6 +35,7 @@ export default class ConfigItem
     public static readonly BLUE_VALUE_FUNCTION_PROPERTY = 'blue_value_function'
     public static readonly OPACITY_FUNCTION_PROPERTY = 'opacity_function'
     public static readonly ELEMENT_DIAMETER_FUNCTION_PROPERTY = 'element_diameter_function'
+    public static readonly ELEMENT_ROTATION_FUNCTION_PROPERTY = 'element_rotation_function'
 
     public constructor(
         protected propertyName: string,

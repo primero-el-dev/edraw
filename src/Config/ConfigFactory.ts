@@ -41,6 +41,7 @@ export default class ConfigFactory
             ConfigFactory.createBlueValueFunctionConfig(),
             ConfigFactory.createOpacityFunctionConfig(),
             ConfigFactory.createElementDiameterFunctionConfig(),
+            ConfigFactory.createElementRotationFunctionConfig(),
         ])
     }
 
@@ -263,7 +264,7 @@ export default class ConfigFactory
     public static createRedValueFunctionConfig(): ConfigItem
     {
         let input = HTMLElementFactory.createInput('text')
-        let inputAdapter = new ConfigInputAdapter(input, ConfigItem.RED_VALUE_FUNCTION_PROPERTY, '')
+        let inputAdapter = new ConfigInputAdapter(input, ConfigItem.RED_VALUE_FUNCTION_PROPERTY, '0')
 
         return new ConfigItem(ConfigItem.RED_VALUE_FUNCTION_PROPERTY, 'RGB red color value function (from time)', inputAdapter)
     }
@@ -271,7 +272,7 @@ export default class ConfigFactory
     public static createGreenValueFunctionConfig(): ConfigItem
     {
         let input = HTMLElementFactory.createInput('text')
-        let inputAdapter = new ConfigInputAdapter(input, ConfigItem.GREEN_VALUE_FUNCTION_PROPERTY, '')
+        let inputAdapter = new ConfigInputAdapter(input, ConfigItem.GREEN_VALUE_FUNCTION_PROPERTY, '0')
 
         return new ConfigItem(ConfigItem.GREEN_VALUE_FUNCTION_PROPERTY, 'RGB green color value function (from time)', inputAdapter)
     }
@@ -279,7 +280,7 @@ export default class ConfigFactory
     public static createBlueValueFunctionConfig(): ConfigItem
     {
         let input = HTMLElementFactory.createInput('text')
-        let inputAdapter = new ConfigInputAdapter(input, ConfigItem.BLUE_VALUE_FUNCTION_PROPERTY, '')
+        let inputAdapter = new ConfigInputAdapter(input, ConfigItem.BLUE_VALUE_FUNCTION_PROPERTY, '0')
 
         return new ConfigItem(ConfigItem.BLUE_VALUE_FUNCTION_PROPERTY, 'RGB blue color value function (from time)', inputAdapter)
     }
@@ -287,7 +288,7 @@ export default class ConfigFactory
     public static createOpacityFunctionConfig(): ConfigItem
     {
         let input = HTMLElementFactory.createInput('text')
-        let inputAdapter = new ConfigInputAdapter(input, ConfigItem.OPACITY_FUNCTION_PROPERTY, '')
+        let inputAdapter = new ConfigInputAdapter(input, ConfigItem.OPACITY_FUNCTION_PROPERTY, '1')
 
         return new ConfigItem(ConfigItem.OPACITY_FUNCTION_PROPERTY, 'Opacity value function (from time)', inputAdapter)
     }
@@ -295,8 +296,16 @@ export default class ConfigFactory
     public static createElementDiameterFunctionConfig(): ConfigItem
     {
         let input = HTMLElementFactory.createInput('text')
-        let inputAdapter = new ConfigInputAdapter(input, ConfigItem.ELEMENT_DIAMETER_FUNCTION_PROPERTY, '')
+        let inputAdapter = new ConfigInputAdapter(input, ConfigItem.ELEMENT_DIAMETER_FUNCTION_PROPERTY, '1')
 
         return new ConfigItem(ConfigItem.ELEMENT_DIAMETER_FUNCTION_PROPERTY, 'Element diameter function (from time)', inputAdapter)
+    }
+
+    public static createElementRotationFunctionConfig(): ConfigItem
+    {
+        let input = HTMLElementFactory.createInput('text')
+        let inputAdapter = new ConfigInputAdapter(input, ConfigItem.ELEMENT_ROTATION_FUNCTION_PROPERTY, '0')
+
+        return new ConfigItem(ConfigItem.ELEMENT_ROTATION_FUNCTION_PROPERTY, 'Element rotation function (from time, 2 * PI as full circle)', inputAdapter)
     }
 }

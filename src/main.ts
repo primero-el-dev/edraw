@@ -31,6 +31,7 @@ try {
 
     const actionButtonFactory = new ActionButtonFactory(canvas, configContainer, configPanel)
     const pencilButton: DrawActionButton = actionButtonFactory.createPencilButton()
+    buttonPanel.append(actionButtonFactory.createMoveButton().getButtonElement())
     buttonPanel.append(pencilButton.getButtonElement())
     buttonPanel.append(actionButtonFactory.createLineButton().getButtonElement())
     buttonPanel.append(actionButtonFactory.createRectangleButton().getButtonElement())

@@ -15,16 +15,24 @@
     <script src="/js/main.js" type="module" defer></script>
 </head>
 <body>
-    <div class="canvas-panel">
+    <div id="mainPanel">
         <div id="canvasContainer">
-            <canvas id="mainCanvas"></canvas>
+            <div id="canvasWrapper">
+                <canvas id="mainCanvas"></canvas>
+                <span class="canvas-resizer" id="canvasHorizontalResizer"></span>
+                <span class="canvas-resizer" id="canvasVerticalResizer"></span>
+                <span class="canvas-resizer" id="canvasSlantResizer"></span>
+            </div>
         </div>
         <div id="configPanel"></div>
     </div>
 
-    <div id="buttonPanel"></div>
-
-    <input type="file" id="importImage">
+    <div id="buttonPanel">
+        <label class="button--action">
+            Import
+            <input type="file" id="importImage" style="display: none;">
+        </label>
+    </div>
 
     <script>var exports = {}</script>
 </body>

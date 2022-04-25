@@ -1,0 +1,6 @@
+import DrawActionButton from "./DrawActionButton.js";
+export default class MoveButton extends DrawActionButton {
+    addListeners() {
+    }
+}
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiTW92ZUJ1dHRvbi5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uLy4uL3NyYy9FbGVtZW50L0J1dHRvbi9Nb3ZlQnV0dG9uLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sZ0JBQWdCLE1BQU0sdUJBQXVCLENBQUM7QUFFckQsTUFBTSxDQUFDLE9BQU8sT0FBTyxVQUFXLFNBQVEsZ0JBQWdCO0lBRTdDLFlBQVk7SUFHbkIsQ0FBQztDQUNKIn0=

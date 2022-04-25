@@ -36,6 +36,7 @@ export default class ConfigItem {
     static readonly BLUE_VALUE_FUNCTION_PROPERTY = "blue_value_function";
     static readonly OPACITY_FUNCTION_PROPERTY = "opacity_function";
     static readonly ELEMENT_DIAMETER_FUNCTION_PROPERTY = "element_diameter_function";
+    static readonly ELEMENT_ROTATION_FUNCTION_PROPERTY = "element_rotation_function";
     constructor(propertyName: string, label: string, input: GetHtmlElementInterface & GetValueInterface);
     getPropertyName(): string;
     getElementWithValue(): HTMLElement;

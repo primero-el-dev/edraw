@@ -61,7 +61,7 @@ export default class AdvancedPolygonBrushButton extends DrawActionButton
         this.colorFunctionWithContourPartial.initColor(this.time)
         let elementDiameter = this.getFunctionFromTimeValueFor(ConfigItem.ELEMENT_DIAMETER_FUNCTION_PROPERTY, this.time)
         let brushDiameter = this.configContainer.getValueAsNumber(ConfigItem.BRUSH_AREA_DIAMETER_PROPERTY)
-        let elementRotateAngle = this.configContainer.getValueAsNumber(ConfigItem.ELEMENT_ROTATION_PROPERTY)
+        let elementRotateAngle = this.getFunctionFromTimeValueFor(ConfigItem.ELEMENT_ROTATION_FUNCTION_PROPERTY, this.time)
         let elementEdgesCount = this.configContainer.getValueAsNumber(ConfigItem.ELEMENT_EDGES_COUNT_PROPERTY)
         let contourOnly = this.configContainer.isContourOnly()
 

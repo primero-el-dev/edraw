@@ -13,12 +13,14 @@ import RotatingPencilButton from "./RotatingPencilButton.js";
 import BungeePencilButton from "./BungeePencilButton.js";
 import AdvancedPencilButton from "./AdvancedPencilButton.js";
 import AdvancedPolygonBrushButton from "./AdvancedPolygonBrushButton.js";
+import MoveButton from "./MoveButton.js";
 export default class ActionButtonFactory {
     private canvas;
     private configContainer;
     private configPanel;
     constructor(canvas: Canvas, configContainer: ConfigContainer, configPanel: ConfigPanel);
     createPencilButton(): PencilButton;
+    createMoveButton(): MoveButton;
     createLineButton(): LineButton;
     createRectangleButton(): RectangleButton;
     createCircleButton(): CircleButton;

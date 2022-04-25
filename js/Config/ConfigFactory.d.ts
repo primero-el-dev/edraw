@@ -34,4 +34,5 @@ export default class ConfigFactory {
     static createBlueValueFunctionConfig(): ConfigItem;
     static createOpacityFunctionConfig(): ConfigItem;
     static createElementDiameterFunctionConfig(): ConfigItem;
+    static createElementRotationFunctionConfig(): ConfigItem;
 }

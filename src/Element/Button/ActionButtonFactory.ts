@@ -15,6 +15,7 @@ import RotatingPencilButton from "./RotatingPencilButton.js";
 import BungeePencilButton from "./BungeePencilButton.js";
 import AdvancedPencilButton from "./AdvancedPencilButton.js";
 import AdvancedPolygonBrushButton from "./AdvancedPolygonBrushButton.js";
+import MoveButton from "./MoveButton.js";
 
 export default class ActionButtonFactory
 {
@@ -34,6 +35,14 @@ export default class ActionButtonFactory
         ])
 
         return new PencilButton(button, this.canvas, newContainer, this.configPanel)
+    }
+
+    public createMoveButton(): MoveButton
+    {
+        let button = HTMLElementFactory.createActionButton('move', 'move')
+        let newContainer = this.configContainer.getWithProperties([])
+
+        return new MoveButton(button, this.canvas, newContainer, this.configPanel)
     }
 
     public createLineButton(): LineButton
@@ -189,7 +198,6 @@ export default class ActionButtonFactory
             ConfigItem.TOUCHES_PER_TICK_PROPERTY,
             ConfigItem.BRUSH_AREA_DIAMETER_PROPERTY,
             ConfigItem.ELEMENT_DIAMETER_PROPERTY,
-            ConfigItem.ELEMENT_ROTATION_PROPERTY,
             ConfigItem.ELEMENT_EDGES_COUNT_PROPERTY,
             ConfigItem.COLOR_PROPERTY,
             ConfigItem.OPACITY_PROPERTY,
@@ -198,6 +206,7 @@ export default class ActionButtonFactory
             ConfigItem.GREEN_VALUE_FUNCTION_PROPERTY,
             ConfigItem.BLUE_VALUE_FUNCTION_PROPERTY,
             ConfigItem.OPACITY_FUNCTION_PROPERTY,
+            ConfigItem.ELEMENT_ROTATION_FUNCTION_PROPERTY,
         ])
 
         return new AdvancedPolygonBrushButton(button, this.canvas, newContainer, this.configPanel)
