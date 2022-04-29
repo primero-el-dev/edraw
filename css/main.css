@@ -48,15 +48,13 @@ input[type="checkbox"] {
 }
 
 #mainCanvas {
-    margin: 20px;
+    margin: 16px 20px;
     border: 1px solid black;
-    width: 200%;
-    height: 500px;
     background-color: #fff;
+    position: absolute;
 }
 
-#mainCanvasContainer {
-    margin: 20px;
+#canvasContainer {
     overflow: scroll;
     display: block;
 }
@@ -66,6 +64,7 @@ input[type="checkbox"] {
     height: fit-content;
     position: relative;
     display: block;
+    padding: 0;
 }
 
 .canvas-resizer {
@@ -78,18 +77,23 @@ input[type="checkbox"] {
 }
 
 #canvasVerticalResizer {
-    bottom: .5rem;
+    bottom: 6px;
     left: 50%;
+    cursor: s-resize;
+    transform: translateX(-50%);
 }
 
 #canvasHorizontalResizer {
     top: 50%;
-    right: .5rem;
+    right: 6px;
+    cursor: e-resize;
+    transform: translateY(-50%);
 }
 
 #canvasSlantResizer {
-    right: 1rem;
-    bottom: 1rem;
+    right: 6px;
+    bottom: 6px;
+    cursor: se-resize;
 }
 
 .button--action {
@@ -112,6 +116,9 @@ input[type="checkbox"] {
 
 #configPanel {
     width: 22rem;
+    position: absolute;
+    top: 0;
+    right: 0;
 }
 
 .config-row {
@@ -169,7 +176,13 @@ input[type="checkbox"] {
     }
 
     #canvasContainer {
-        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        overflow: scroll;
+        overflow-y: scroll;
+        height: calc(100vh - 6rem);
+        width: calc(100vw - 28rem);
     }
 
     #configPanel {
@@ -193,5 +206,7 @@ input[type="checkbox"] {
         display: flex;
         flex-direction: row;
         background-color: #c6c6c6;
+        position: absolute;
+        bottom: 0;
     }
 }

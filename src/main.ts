@@ -6,6 +6,10 @@ import ConfigPanel from "./Element/ConfigPanel.js";
 import ConfigFactory from './Config/ConfigFactory.js';
 import ConfigContainer from "./Config/ConfigContainer.js";
 import DefaultValueFunctionInterpreter from "./Dsl/Interpreter/DefaultValueFunctionInterpreter.js";
+import SouthResizer from './Element/Resizer/SouthResizer.js';
+import EastResizer from "./Element/Resizer/EastResizer.js";
+import SouthEastResizer from "./Element/Resizer/SouthEastResizer.js";
+import Resizer from "./Element/Resizer/Resizer.js";
 
 function getByIdOrThrowError(elementId: string): HTMLElement
 {
@@ -18,14 +22,14 @@ function getByIdOrThrowError(elementId: string): HTMLElement
 }
 
 try {
-    let interpreter = new DefaultValueFunctionInterpreter()
-    interpreter.interpret('2 * s', {s: 2})
-
     const buttonPanel = getByIdOrThrowError('buttonPanel')
     const mainCanvas = getByIdOrThrowError('mainCanvas') as HTMLCanvasElement
     const configPanelElement = getByIdOrThrowError('configPanel')
     const configContainer: ConfigContainer = ConfigFactory.createDefaultConfigContainer()
     const canvas: Canvas = new Canvas(mainCanvas, configContainer)
+    const canvasVerticalResizer = new Resizer(document.getElementById('canvasVerticalResizer'), canvas, true, false)
+    const canvasHorizontalResizer = new Resizer(document.getElementById('canvasHorizontalResizer'), canvas, false, true)
+    const canvasSlantResizer = new Resizer(document.getElementById('canvasSlantResizer'), canvas, true, true)
     const configPanel: ConfigPanel = new ConfigPanel(configPanelElement)
     configPanel.renderConfigPanel(configContainer)
 
@@ -63,10 +67,6 @@ try {
 
     const importInput = getByIdOrThrowError('importImage')
     importInput.addEventListener('change', importPicture, false)
-
-    window.addEventListener('resize', e => {
-        canvas.onResize()
-    })
 
 } catch (error) {
     alert(error)
