@@ -4,6 +4,8 @@ export default class ConfigItem {
     protected propertyName: string;
     protected label: string;
     protected input: GetHtmlElementInterface & GetValueInterface;
+    static readonly CANVAS_WIDTH_PROPERTY = "canvas_width";
+    static readonly CANVAS_HEIGHT_PROPERTY = "canvas_height";
     static readonly LINE_WIDTH_PROPERTY = "line_width";
     static readonly COLOR_PROPERTY = "color";
     static readonly OPACITY_PROPERTY = "opacity";

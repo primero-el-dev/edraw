@@ -51,7 +51,7 @@ input[type="checkbox"] {
     margin: 16px 20px;
     border: 1px solid black;
     background-color: #fff;
-    position: absolute;
+    /*position: absolute;*/
 }
 
 #canvasContainer {
@@ -114,13 +114,6 @@ input[type="checkbox"] {
     font-size: 1.4rem;
 }
 
-#configPanel {
-    width: 22rem;
-    position: absolute;
-    top: 0;
-    right: 0;
-}
-
 .config-row {
     font-size: 1.4rem;
     margin: .75rem auto;
@@ -153,10 +146,6 @@ input[type="checkbox"] {
     text-align: center;
 }
 
-.modal__close {
-
-}
-
 .modal__header {
     display: block;
     font-size: 2.4rem;
@@ -180,12 +169,14 @@ input[type="checkbox"] {
         top: 0;
         left: 0;
         overflow: scroll;
-        overflow-y: scroll;
         height: calc(100vh - 6rem);
         width: calc(100vw - 28rem);
     }
 
     #configPanel {
+        position: absolute;
+        top: 0;
+        right: 0;
         float: right;
         display: flex;
         flex-direction: column;
@@ -207,6 +198,44 @@ input[type="checkbox"] {
         flex-direction: row;
         background-color: #c6c6c6;
         position: absolute;
+        bottom: 0;
+    }
+}
+
+@media screen and (max-width: 699px) {
+    #mainPanel {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+    }
+
+    #canvasContainer {
+        position: static;
+        top: 0;
+        left: 0;
+        width: 100%;
+        overflow: scroll;
+    }
+
+    #configPanel {
+        display: flex;
+        flex-direction: column;
+        padding: 1rem 2rem;
+        width: 100%;
+        border-left: 2px solid black;
+        background-color: #c6c6c6;
+        overflow-y: scroll;
+    }
+
+    #buttonPanel {
+        height: 6rem;
+        padding: .25rem 1rem;
+        border-top: 2px solid black;
+        overflow-x: scroll;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        background-color: #c6c6c6;
         bottom: 0;
     }
 }

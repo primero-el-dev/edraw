@@ -40,7 +40,10 @@ export default class ActionButtonFactory
     public createMoveButton(): MoveButton
     {
         let button = HTMLElementFactory.createActionButton('move', 'move')
-        let newContainer = this.configContainer.getWithProperties([])
+        let newContainer = this.configContainer.getWithProperties([
+            ConfigItem.CANVAS_WIDTH_PROPERTY,
+            ConfigItem.CANVAS_HEIGHT_PROPERTY,
+        ])
 
         return new MoveButton(button, this.canvas, newContainer, this.configPanel)
     }

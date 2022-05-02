@@ -3,6 +3,8 @@ import GetValueInterface from "../Element/GetValueInterface.js";
 
 export default class ConfigItem
 {
+    public static readonly CANVAS_WIDTH_PROPERTY = 'canvas_width'
+    public static readonly CANVAS_HEIGHT_PROPERTY = 'canvas_height'
     public static readonly LINE_WIDTH_PROPERTY = 'line_width'
     public static readonly COLOR_PROPERTY = 'color'
     public static readonly OPACITY_PROPERTY = 'opacity'

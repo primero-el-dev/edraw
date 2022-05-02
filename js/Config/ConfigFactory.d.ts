@@ -1,7 +1,11 @@
 import ConfigItem from "./ConfigItem.js";
 import ConfigContainer from "./ConfigContainer.js";
+import Canvas from "../Element/Canvas.js";
 export default class ConfigFactory {
+    static createCanvasConfigContainer(canvas: Canvas): ConfigContainer;
     static createDefaultConfigContainer(): ConfigContainer;
+    static createCanvasWidthConfig(canvas: Canvas): ConfigItem;
+    static createCanvasHeightConfig(canvas: Canvas): ConfigItem;
     static createLineWidthConfig(): ConfigItem;
     static createColorConfig(): ConfigItem;
     static createOpacityConfig(): ConfigItem;

@@ -1,13 +1,12 @@
-import ConfigContainer from "../Config/ConfigContainer.js";
 import ResizeUpInterface from "./ResizeUpInterface.js";
 export default class Canvas implements ResizeUpInterface {
     canvas: HTMLCanvasElement;
-    private configContainer;
     ctx: CanvasRenderingContext2D;
-    constructor(canvas: HTMLCanvasElement, configContainer: ConfigContainer);
+    constructor(canvas: HTMLCanvasElement);
     configureCanvasSize(): void;
     resize(width: number, height: number): void;
     removeEventListeners(): void;
-    protected initContext(): void;
     resizeUp(width: number, height: number): void;
+    setWidth(width: number): void;
+    setHeight(height: number): void;
 }

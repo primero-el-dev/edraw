@@ -61,8 +61,8 @@ export default class PolygonBrushButton extends DrawActionButton
                 elementBlueSpreadLimit
             )
 
-            this.target.ctx.fillStyle = color.toString()
-            this.target.ctx.strokeStyle = contourOnly ? 'transparent' : color.toDecmalStringWithOpacity(opacity)
+            this.target.ctx.fillStyle = color.toDecmalStringWithOpacity(opacity)
+            this.target.ctx.strokeStyle = contourOnly ? color.toDecmalStringWithOpacity(opacity) : 'transparent'
             this.target.ctx.beginPath()
             this.target.ctx.moveTo(
                 elementX + Math.sin(getNthAngle(0)) * (elementDiameter / 2),

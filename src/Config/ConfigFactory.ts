@@ -3,9 +3,20 @@ import ConfigContainer from "./ConfigContainer.js";
 import ConfigCheckboxAdapter from "../Element/Input/ConfigCheckboxAdapter.js";
 import ConfigInputAdapter from "../Element/Input/ConfigInputAdapter.js";
 import HTMLElementFactory from "../Element/HTMLElementFactory.js";
+import Canvas from "../Element/Canvas.js";
+import CanvasWidthConfigItem from "./CanvasWidthConfigItem.js";
+import CanvasHeightConfigItem from "./CanvasHeightConfigItem.js";
 
 export default class ConfigFactory
 {
+    public static createCanvasConfigContainer(canvas: Canvas): ConfigContainer
+    {
+        return new ConfigContainer([
+            ConfigFactory.createCanvasWidthConfig(canvas),
+            ConfigFactory.createCanvasHeightConfig(canvas),
+        ])
+    }
+
     public static createDefaultConfigContainer(): ConfigContainer
     {
         return new ConfigContainer([
@@ -43,6 +54,22 @@ export default class ConfigFactory
             ConfigFactory.createElementDiameterFunctionConfig(),
             ConfigFactory.createElementRotationFunctionConfig(),
         ])
+    }
+
+    public static createCanvasWidthConfig(canvas: Canvas): ConfigItem
+    {
+        let input = HTMLElementFactory.createInput('number', { min: 1 })
+        let inputAdapter = new ConfigInputAdapter(input, ConfigItem.CANVAS_WIDTH_PROPERTY, '300')
+
+        return new CanvasWidthConfigItem(ConfigItem.CANVAS_WIDTH_PROPERTY, 'Canvas width', inputAdapter, canvas)
+    }
+
+    public static createCanvasHeightConfig(canvas: Canvas): ConfigItem
+    {
+        let input = HTMLElementFactory.createInput('number', { min: 1 })
+        let inputAdapter = new ConfigInputAdapter(input, ConfigItem.CANVAS_HEIGHT_PROPERTY, '300')
+
+        return new CanvasHeightConfigItem(ConfigItem.CANVAS_HEIGHT_PROPERTY, 'Canvas height', inputAdapter, canvas)
     }
 
     public static createLineWidthConfig(): ConfigItem

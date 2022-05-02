@@ -10,6 +10,7 @@ import SouthResizer from './Element/Resizer/SouthResizer.js';
 import EastResizer from "./Element/Resizer/EastResizer.js";
 import SouthEastResizer from "./Element/Resizer/SouthEastResizer.js";
 import Resizer from "./Element/Resizer/Resizer.js";
+import ResizeUpInterface from "./Element/ResizeUpInterface.js";
 
 function getByIdOrThrowError(elementId: string): HTMLElement
 {
@@ -25,17 +26,66 @@ try {
     const buttonPanel = getByIdOrThrowError('buttonPanel')
     const mainCanvas = getByIdOrThrowError('mainCanvas') as HTMLCanvasElement
     const configPanelElement = getByIdOrThrowError('configPanel')
+    const canvas: Canvas = new Canvas(mainCanvas)
     const configContainer: ConfigContainer = ConfigFactory.createDefaultConfigContainer()
-    const canvas: Canvas = new Canvas(mainCanvas, configContainer)
-    const canvasVerticalResizer = new Resizer(document.getElementById('canvasVerticalResizer'), canvas, true, false)
-    const canvasHorizontalResizer = new Resizer(document.getElementById('canvasHorizontalResizer'), canvas, false, true)
-    const canvasSlantResizer = new Resizer(document.getElementById('canvasSlantResizer'), canvas, true, true)
+
+    let lastX: number = null
+    let lastY: number = null
+
+    // OO not working
+    const verticalResizer = document.getElementById('canvasVerticalResizer')
+    verticalResizer.addEventListener('dragstart', e => {
+        lastY = e.clientY
+    })
+    verticalResizer.addEventListener('drag', e => {
+        lastY = lastY || e.clientY
+        canvas.resizeUp(0, e.clientY - lastY)
+        lastY = e.clientY
+    })
+    verticalResizer.addEventListener('dragleave', e => {
+        lastY = null
+    })
+
+    const horizontalResizer = document.getElementById('canvasHorizontalResizer')
+    horizontalResizer.addEventListener('dragstart', e => {
+        lastX = e.clientX
+    })
+    horizontalResizer.addEventListener('drag', e => {
+        lastX = lastX || e.clientX
+        canvas.resizeUp( e.clientX - lastX, 0)
+        lastX = e.clientX
+    })
+    horizontalResizer.addEventListener('dragleave', e => {
+        lastX = null
+    })
+
+    const slantResizer = document.getElementById('canvasSlantResizer')
+    slantResizer.addEventListener('dragstart', e => {
+        lastX = e.clientX
+        lastY = e.clientY
+    })
+    slantResizer.addEventListener('drag', e => {
+        lastX = lastX || e.clientX
+        lastY = lastY || e.clientY
+        canvas.resizeUp(e.clientX - lastX, e.clientY - lastY)
+        lastX = e.clientX
+        lastY = e.clientY
+    })
+    slantResizer.addEventListener('dragleave', e => {
+        lastX = null
+        lastY = null
+    })
+
+    const canvasConfigContainer: ConfigContainer = ConfigFactory.createCanvasConfigContainer(canvas)
+    // const canvasVerticalResizer = new Resizer(document.getElementById('canvasVerticalResizer'), canvas, true, false)
+    // const canvasHorizontalResizer = new Resizer(document.getElementById('canvasHorizontalResizer'), canvas, false, true)
+    // const canvasSlantResizer = new Resizer(document.getElementById('canvasSlantResizer'), canvas, true, true)
     const configPanel: ConfigPanel = new ConfigPanel(configPanelElement)
     configPanel.renderConfigPanel(configContainer)
 
     const actionButtonFactory = new ActionButtonFactory(canvas, configContainer, configPanel)
     const pencilButton: DrawActionButton = actionButtonFactory.createPencilButton()
-    buttonPanel.append(actionButtonFactory.createMoveButton().getButtonElement())
+    // buttonPanel.append(actionButtonFactory.createMoveButton().getButtonElement())
     buttonPanel.append(pencilButton.getButtonElement())
     buttonPanel.append(actionButtonFactory.createLineButton().getButtonElement())
     buttonPanel.append(actionButtonFactory.createRectangleButton().getButtonElement())
@@ -56,8 +106,7 @@ try {
         let reader = new FileReader()
         reader.onload = function (event) {
             img.onload = function () {
-                canvas.canvas.width = img.width
-                canvas.canvas.height = img.height
+                canvas.resize(img.width, img.height)
                 canvas.ctx.drawImage(img, 0, 0)
             }
             img.src = event.target.result as unknown as string
