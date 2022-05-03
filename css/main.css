@@ -13,7 +13,7 @@ html {
 body {
     font-size: 1.6rem;
     font-family: Helvetica, sans-serif;
-    background-color: #828282;
+    background-color: #c6c6c6;
 }
 
 input {
@@ -57,6 +57,7 @@ input[type="checkbox"] {
 #canvasContainer {
     overflow: scroll;
     display: block;
+    background-color: #828282;
 }
 
 #canvasWrapper {
@@ -142,19 +143,56 @@ input[type="checkbox"] {
     z-index: 100;
     top: 50vh;
     left: 50vw;
+    width: min(30rem, 80vw);
     transform: translate(-50%,-50%);
     text-align: center;
+    background-color: #c6c6c6;
+    border: 1px solid black;
 }
 
 .modal__header {
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-size: 2.4rem;
     text-align: center;
+    height: 4rem;
+    background-color: #0045d9;
+    color: #ffee00;
+}
+
+.modal__close {
+    position: absolute;
+    top: .5rem;
+    right: 1rem;
+    cursor: pointer;
+}
+
+.modal__content {
+    padding: 1.5rem 2rem;
+}
+
+.display-none {
+    display: none;
 }
 
 .modal__paragraph {
     display: block;
     text-align: center;
+    margin: .5rem 0;
+}
+
+#footer {
+    background-color: #c6c6c6;
+    width: 100%;
+    height: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer-link {
+    margin-left: .75rem;
 }
 
 @media screen and (min-width: 700px) {
@@ -169,7 +207,7 @@ input[type="checkbox"] {
         top: 0;
         left: 0;
         overflow: scroll;
-        height: calc(100vh - 6rem);
+        height: calc(100vh - 10rem);
         width: calc(100vw - 28rem);
     }
 
@@ -185,7 +223,7 @@ input[type="checkbox"] {
         border-left: 2px solid black;
         background-color: #c6c6c6;
         overflow-y: scroll;
-        height: calc(100vh - 6rem);
+        height: calc(100vh - 10rem);
     }
 
     #buttonPanel {
@@ -198,6 +236,12 @@ input[type="checkbox"] {
         flex-direction: row;
         background-color: #c6c6c6;
         position: absolute;
+        bottom: 4rem;
+    }
+
+    #footer {
+        position: absolute;
+        left: 0;
         bottom: 0;
     }
 }

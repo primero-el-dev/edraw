@@ -19,21 +19,20 @@
         <div id="canvasContainer">
             <div id="canvasWrapper">
                 <canvas id="mainCanvas"></canvas>
-                <span class="canvas-resizer" id="canvasHorizontalResizer"></span>
-                <span class="canvas-resizer" id="canvasVerticalResizer"></span>
-                <span class="canvas-resizer" id="canvasSlantResizer"></span>
+                <span class="canvas-resizer" id="canvasHorizontalResizer" draggable="true"></span>
+                <span class="canvas-resizer" id="canvasVerticalResizer" draggable="true"></span>
+                <span class="canvas-resizer" id="canvasSlantResizer" draggable="true"></span>
             </div>
         </div>
     </div>
 
     <div id="configPanel"></div>
 
-    <div id="buttonPanel">
-        <label class="button--action">
-            Import
-            <input type="file" id="importImage" style="display: none;">
-        </label>
-    </div>
+    <div id="buttonPanel"></div>
+
+    <footer id="footer">
+        &copy; 2020 by Przemek Krogulski <a class="footer-link" href="https://github.com/primero-el-dev/edraw">Github</a>
+    </footer>
 
     <script>var exports = {}</script>
 </body>

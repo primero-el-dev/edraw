@@ -1,27 +1,22 @@
-import DrawActionButton from "./DrawActionButton.js";
-import Canvas from "../Canvas";
-import ConfigContainer from "../../Config/ConfigContainer";
-import ConfigPanel from "../ConfigPanel";
+import Canvas from "../Canvas.js";
+import ActionButton from "./ActionButton.js";
 
-export default class ExportButton extends DrawActionButton
+export default class ExportButton extends ActionButton
 {
     public constructor(
         protected buttonElement: HTMLElement,
-        protected target: Canvas,
-        protected configContainer: ConfigContainer,
-        protected configPanel: ConfigPanel
+        protected target: Canvas
     ) {
-        super(buttonElement, target, configContainer, configPanel)
-        this.buttonElement.addEventListener('click', e => {
+        super(buttonElement)
+    }
+
+    protected onClick(): any
+    {
+        return () => {
             const link = document.createElement('a')
             link.download = 'edraw_image_download.png'
             link.href = this.target.canvas.toDataURL()
             link.click()
-        })
-    }
-
-    public addListeners(): void
-    {
-        //
+        }
     }
 }

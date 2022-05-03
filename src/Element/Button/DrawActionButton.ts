@@ -2,8 +2,9 @@ import Canvas from '../Canvas.js'
 import ConfigContainer from "../../Config/ConfigContainer.js";
 import ConfigPanel from "../ConfigPanel.js";
 import AppWindow from "../AppWindow.js";
+import ActionButton from "./ActionButton.js";
 
-export default abstract class DrawActionButton
+export default abstract class DrawActionButton extends ActionButton
 {
     public constructor(
         protected buttonElement: HTMLElement,
@@ -11,16 +12,21 @@ export default abstract class DrawActionButton
         protected configContainer: ConfigContainer,
         protected configPanel: ConfigPanel
     ) {
-        this.buttonElement.onclick = () => {
-            this.configPanel.renderConfigPanel(configContainer)
+        super(buttonElement)
+    }
+
+    protected onClick(): any
+    {
+        return () => {
+            this.configPanel.renderConfigPanel(this.configContainer)
             AppWindow.getInstance().clearIntervals()
             this.setListeners()
         }
     }
 
-    public abstract addListeners(): void
+    protected abstract addListeners(): void
 
-    public setListeners(): void
+    protected setListeners(): void
     {
         this.target.removeEventListeners()
         this.addListeners()

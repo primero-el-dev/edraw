@@ -85,7 +85,6 @@ try {
 
     const actionButtonFactory = new ActionButtonFactory(canvas, configContainer, configPanel)
     const pencilButton: DrawActionButton = actionButtonFactory.createPencilButton()
-    // buttonPanel.append(actionButtonFactory.createMoveButton().getButtonElement())
     buttonPanel.append(pencilButton.getButtonElement())
     buttonPanel.append(actionButtonFactory.createLineButton().getButtonElement())
     buttonPanel.append(actionButtonFactory.createRectangleButton().getButtonElement())
@@ -97,25 +96,10 @@ try {
     buttonPanel.append(actionButtonFactory.createBungeePencilButton().getButtonElement())
     buttonPanel.append(actionButtonFactory.createAdvancedPencilButton().getButtonElement())
     buttonPanel.append(actionButtonFactory.createAdvancedPolygonBrushButton().getButtonElement())
+    buttonPanel.append(actionButtonFactory.createAboutButton().getButtonElement())
+    buttonPanel.append(actionButtonFactory.createImportButton().getButtonElement())
     buttonPanel.append(actionButtonFactory.createExportButton().getButtonElement())
     pencilButton.getButtonElement().click()
-
-    function importPicture()
-    {
-        let img = new Image()
-        let reader = new FileReader()
-        reader.onload = function (event) {
-            img.onload = function () {
-                canvas.resize(img.width, img.height)
-                canvas.ctx.drawImage(img, 0, 0)
-            }
-            img.src = event.target.result as unknown as string
-        }
-        reader.readAsDataURL(this.files[0])
-    }
-
-    const importInput = getByIdOrThrowError('importImage')
-    importInput.addEventListener('change', importPicture, false)
 
 } catch (error) {
     alert(error)

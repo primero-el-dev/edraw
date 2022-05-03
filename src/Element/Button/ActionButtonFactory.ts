@@ -16,6 +16,8 @@ import BungeePencilButton from "./BungeePencilButton.js";
 import AdvancedPencilButton from "./AdvancedPencilButton.js";
 import AdvancedPolygonBrushButton from "./AdvancedPolygonBrushButton.js";
 import MoveButton from "./MoveButton.js";
+import ImportButton from "./ImportButton.js";
+import AboutButton from "./AboutButton.js";
 
 export default class ActionButtonFactory
 {
@@ -24,6 +26,13 @@ export default class ActionButtonFactory
         private configContainer: ConfigContainer,
         private configPanel: ConfigPanel
     ) {}
+
+    public createAboutButton(): AboutButton
+    {
+        let button = HTMLElementFactory.createActionButton('about', 'about')
+
+        return new AboutButton(button)
+    }
 
     public createPencilButton(): PencilButton
     {
@@ -215,11 +224,17 @@ export default class ActionButtonFactory
         return new AdvancedPolygonBrushButton(button, this.canvas, newContainer, this.configPanel)
     }
 
+    public createImportButton(): ImportButton
+    {
+        let button = HTMLElementFactory.createActionButton('import', 'import')
+
+        return new ImportButton(button, this.canvas)
+    }
+
     public createExportButton(): ExportButton
     {
         let button = HTMLElementFactory.createActionButton('export', 'export')
-        let newContainer = this.configContainer.getWithProperties([])
 
-        return new ExportButton(button, this.canvas, newContainer, this.configPanel)
+        return new ExportButton(button, this.canvas)
     }
 }
