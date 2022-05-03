@@ -14,7 +14,7 @@ export default class ExportButton extends DrawActionButton
         super(buttonElement, target, configContainer, configPanel)
         this.buttonElement.addEventListener('click', e => {
             const link = document.createElement('a')
-            link.download = 'download.png'
+            link.download = 'edraw_image_download.png'
             link.href = this.target.canvas.toDataURL()
             link.click()
         })
