@@ -105,6 +105,8 @@ try {
     buttonPanel.append(actionButtonFactory.createExportButton().getButtonElement())
     pencilButton.getButtonElement().click()
 
+    canvas.resize(500, 500)
+
 } catch (error) {
     alert(error)
     console.error(error)
