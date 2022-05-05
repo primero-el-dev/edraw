@@ -6,7 +6,7 @@
   "author": "Przemysław Krogulski",
   "license": "SEE LICENCE IN LICENCE",
   "scripts": {
-    "start": "tsc -p tsconfig.json -w",
+    "start": "tsc -p tsconfig.json",
     "watch": "tsc -p tsconfig.json -w",
     "serve": "cd public && web-dev-server --node-resolve --watch --open --app-index index.html",
     "test": "jest"
