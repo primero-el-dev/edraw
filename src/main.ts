@@ -23,6 +23,7 @@ function getByIdOrThrowError(elementId: string): HTMLElement
 }
 
 try {
+    const canvasContainer = getByIdOrThrowError('canvasContainer')
     const buttonPanel = getByIdOrThrowError('buttonPanel')
     const mainCanvas = getByIdOrThrowError('mainCanvas') as HTMLCanvasElement
     const configPanelElement = getByIdOrThrowError('configPanel')
@@ -35,12 +36,12 @@ try {
     // OO not working
     const verticalResizer = document.getElementById('canvasVerticalResizer')
     verticalResizer.addEventListener('dragstart', e => {
-        lastY = e.clientY
+        lastY = e.clientY + canvasContainer.scrollTop
     })
     verticalResizer.addEventListener('drag', e => {
-        lastY = lastY || e.clientY
-        canvas.resizeUp(0, e.clientY - lastY)
-        lastY = e.clientY
+        lastY = lastY || (e.clientY + canvasContainer.scrollTop)
+        canvas.resizeUp(0, parseInt(e.clientY + canvasContainer.scrollTop - lastY))
+        lastY = e.clientY + canvasContainer.scrollTop
     })
     verticalResizer.addEventListener('dragleave', e => {
         lastY = null
@@ -48,12 +49,12 @@ try {
 
     const horizontalResizer = document.getElementById('canvasHorizontalResizer')
     horizontalResizer.addEventListener('dragstart', e => {
-        lastX = e.clientX
+        lastX = e.clientX + canvasContainer.scrollLeft
     })
     horizontalResizer.addEventListener('drag', e => {
-        lastX = lastX || e.clientX
-        canvas.resizeUp( e.clientX - lastX, 0)
-        lastX = e.clientX
+        lastX = lastX || (e.clientX + canvasContainer.scrollLeft)
+        canvas.resizeUp(parseInt(e.clientX + canvasContainer.scrollLeft - lastX), 0)
+        lastX = e.clientX + canvasContainer.scrollLeft
     })
     horizontalResizer.addEventListener('dragleave', e => {
         lastX = null
@@ -61,15 +62,18 @@ try {
 
     const slantResizer = document.getElementById('canvasSlantResizer')
     slantResizer.addEventListener('dragstart', e => {
-        lastX = e.clientX
-        lastY = e.clientY
+        lastX = e.clientX + canvasContainer.scrollLeft
+        lastY = e.clientY + canvasContainer.scrollTop
     })
     slantResizer.addEventListener('drag', e => {
-        lastX = lastX || e.clientX
-        lastY = lastY || e.clientY
-        canvas.resizeUp(e.clientX - lastX, e.clientY - lastY)
-        lastX = e.clientX
-        lastY = e.clientY
+        lastX = lastX || (e.clientX + canvasContainer.scrollLeft)
+        lastY = lastY || (e.clientY + canvasContainer.scrollTop)
+        canvas.resizeUp(
+            parseInt(e.clientX + canvasContainer.scrollLeft - lastX),
+            parseInt(e.clientY + canvasContainer.scrollTop - lastY)
+        )
+        lastX = e.clientX + canvasContainer.scrollLeft
+        lastY = e.clientY + canvasContainer.scrollTop
     })
     slantResizer.addEventListener('dragleave', e => {
         lastX = null
