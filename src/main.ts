@@ -40,7 +40,7 @@ try {
     })
     verticalResizer.addEventListener('drag', e => {
         lastY = lastY || (e.clientY + canvasContainer.scrollTop)
-        canvas.resizeUp(0, parseInt(e.clientY + canvasContainer.scrollTop - lastY))
+        canvas.resizeUp(0, e.clientY + canvasContainer.scrollTop - lastY)
         lastY = e.clientY + canvasContainer.scrollTop
     })
     verticalResizer.addEventListener('dragleave', e => {
@@ -53,7 +53,7 @@ try {
     })
     horizontalResizer.addEventListener('drag', e => {
         lastX = lastX || (e.clientX + canvasContainer.scrollLeft)
-        canvas.resizeUp(parseInt(e.clientX + canvasContainer.scrollLeft - lastX), 0)
+        canvas.resizeUp(e.clientX + canvasContainer.scrollLeft - lastX, 0)
         lastX = e.clientX + canvasContainer.scrollLeft
     })
     horizontalResizer.addEventListener('dragleave', e => {
@@ -69,8 +69,8 @@ try {
         lastX = lastX || (e.clientX + canvasContainer.scrollLeft)
         lastY = lastY || (e.clientY + canvasContainer.scrollTop)
         canvas.resizeUp(
-            parseInt(e.clientX + canvasContainer.scrollLeft - lastX),
-            parseInt(e.clientY + canvasContainer.scrollTop - lastY)
+            e.clientX + canvasContainer.scrollLeft - lastX,
+            e.clientY + canvasContainer.scrollTop - lastY
         )
         lastX = e.clientX + canvasContainer.scrollLeft
         lastY = e.clientY + canvasContainer.scrollTop
