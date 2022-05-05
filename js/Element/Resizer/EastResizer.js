@@ -1,0 +1,4 @@
+import Resizer from "./Resizer.js";
+export default class EastResizer extends Resizer {
+}
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiRWFzdFJlc2l6ZXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi8uLi9zcmMvRWxlbWVudC9SZXNpemVyL0Vhc3RSZXNpemVyLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sT0FBTyxNQUFNLGNBQWMsQ0FBQTtBQUVsQyxNQUFNLENBQUMsT0FBTyxPQUFPLFdBQVksU0FBUSxPQUFPO0NBRS9DIn0=

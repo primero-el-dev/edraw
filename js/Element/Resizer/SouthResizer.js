@@ -1,0 +1,4 @@
+import Resizer from "./Resizer.js";
+export default class SouthResizer extends Resizer {
+}
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU291dGhSZXNpemVyLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiLi4vLi4vLi4vc3JjL0VsZW1lbnQvUmVzaXplci9Tb3V0aFJlc2l6ZXIudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxPQUFPLE1BQU0sY0FBYyxDQUFBO0FBRWxDLE1BQU0sQ0FBQyxPQUFPLE9BQU8sWUFBYSxTQUFRLE9BQU87Q0FFaEQifQ==

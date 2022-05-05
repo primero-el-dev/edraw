@@ -1,0 +1,7 @@
+import CanvasConfigItem from "./CanvasConfigItem.js";
+export default class CanvasHeightConfigItem extends CanvasConfigItem {
+    onChange() {
+        this.canvas.setHeight(this.input.getValue());
+    }
+}
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiQ2FudmFzSGVpZ2h0Q29uZmlnSXRlbS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uL3NyYy9Db25maWcvQ2FudmFzSGVpZ2h0Q29uZmlnSXRlbS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLGdCQUFnQixNQUFNLHVCQUF1QixDQUFDO0FBRXJELE1BQU0sQ0FBQyxPQUFPLE9BQU8sc0JBQXVCLFNBQVEsZ0JBQWdCO0lBRXRELFFBQVE7UUFFZCxJQUFJLENBQUMsTUFBTSxDQUFDLFNBQVMsQ0FBQyxJQUFJLENBQUMsS0FBSyxDQUFDLFFBQVEsRUFBRSxDQUFDLENBQUE7SUFDaEQsQ0FBQztDQUNKIn0=
