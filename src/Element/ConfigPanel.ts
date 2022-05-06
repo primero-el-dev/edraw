@@ -6,12 +6,17 @@ export default class ConfigPanel
 {
     public constructor(private element: HTMLElement) {}
 
-    public renderConfigPanel(configContainer: ConfigContainer): void
+    public renderConfigPanel(title: string, configContainer: ConfigContainer): void
     {
-        this.element.innerHTML = ''
+        this.element.innerHTML = this.getSectionTitle(title)
         for (let config of configContainer.getItems()) {
             this.createConfigRow(config)
         }
+    }
+
+    private getSectionTitle(title: string): string
+    {
+        return `<h3>${title}</h3>`
     }
 
     private createConfigRow(configItem: ConfigItem): void

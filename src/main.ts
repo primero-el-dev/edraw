@@ -85,7 +85,7 @@ try {
     // const canvasHorizontalResizer = new Resizer(document.getElementById('canvasHorizontalResizer'), canvas, false, true)
     // const canvasSlantResizer = new Resizer(document.getElementById('canvasSlantResizer'), canvas, true, true)
     const configPanel: ConfigPanel = new ConfigPanel(configPanelElement)
-    configPanel.renderConfigPanel(configContainer)
+    configPanel.renderConfigPanel('Pencil', configContainer)
 
     const actionButtonFactory = new ActionButtonFactory(canvas, configContainer, configPanel)
     const pencilButton: DrawActionButton = actionButtonFactory.createPencilButton()

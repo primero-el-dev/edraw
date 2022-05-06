@@ -18,7 +18,7 @@ export default abstract class DrawActionButton extends ActionButton
     protected onClick(): any
     {
         return () => {
-            this.configPanel.renderConfigPanel(this.configContainer)
+            this.configPanel.renderConfigPanel(this.buttonElement.innerText, this.configContainer)
             AppWindow.getInstance().clearIntervals()
             this.setListeners()
         }
