@@ -3,14 +3,16 @@ import ConfigContainer from "../../Config/ConfigContainer.js";
 import ConfigPanel from "../ConfigPanel.js";
 import AppWindow from "../AppWindow.js";
 import ActionButton from "./ActionButton.js";
+import SetCanvasActionStrategy from "../../Draw/Strategy/SetCanvasActionStrategy.js";
 
-export default abstract class DrawActionButton extends ActionButton
+export default class DrawActionButton extends ActionButton
 {
     public constructor(
         protected buttonElement: HTMLElement,
         protected target: Canvas,
         protected configContainer: ConfigContainer,
-        protected configPanel: ConfigPanel
+        protected configPanel: ConfigPanel,
+        protected drawStrategy: SetCanvasActionStrategy
     ) {
         super(buttonElement)
     }
@@ -20,16 +22,9 @@ export default abstract class DrawActionButton extends ActionButton
         return () => {
             this.configPanel.renderConfigPanel(this.buttonElement.innerText, this.configContainer)
             AppWindow.getInstance().clearIntervals()
-            this.setListeners()
+            this.target.removeEventListeners()
+            this.drawStrategy.setAction(this.target, this.configContainer)
         }
-    }
-
-    protected abstract addListeners(): void
-
-    protected setListeners(): void
-    {
-        this.target.removeEventListeners()
-        this.addListeners()
     }
 
     public getButtonElement(): HTMLElement

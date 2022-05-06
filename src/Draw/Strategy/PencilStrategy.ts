@@ -3,7 +3,7 @@ import Canvas from "../../Element/Canvas.js";
 import ConfigItem from "../../Config/ConfigItem.js";
 import ConfigContainer from "../../Config/ConfigContainer.js";
 
-export default class ComputerLineStrategy implements SetCanvasActionStrategy
+export default class PencilStrategy implements SetCanvasActionStrategy
 {
     private lastX: number
     private lastY: number
@@ -11,7 +11,7 @@ export default class ComputerLineStrategy implements SetCanvasActionStrategy
 
     public setAction(canvas: Canvas, configContainer: ConfigContainer): void
     {
-        canvas.canvas.onmousedown = e => {
+        const startFunction = e => {
             this.lastX = e.offsetX
             this.lastY = e.offsetY
             this.pressed = true
@@ -31,12 +31,14 @@ export default class ComputerLineStrategy implements SetCanvasActionStrategy
             )
             canvas.ctx.fill()
         }
-        canvas.canvas.onmouseup = e => {
+
+        const endFunction = e => {
             this.lastX = null
             this.lastY = null
             this.pressed = false
         }
-        canvas.canvas.onmousemove = e => {
+
+        const moveFunction = e => {
             if (this.pressed) {
                 canvas.ctx.lineWidth = configContainer.getLineWidth()
                 canvas.ctx.fillStyle = configContainer.getValueByProperty(ConfigItem.COLOR_PROPERTY)
@@ -50,5 +52,14 @@ export default class ComputerLineStrategy implements SetCanvasActionStrategy
                 this.lastY = e.offsetY
             }
         }
+
+        canvas.canvas.onmouseover = null
+        canvas.canvas.onmousedown = startFunction
+        canvas.canvas.ontouchstart = startFunction
+        canvas.canvas.onmouseup = endFunction
+        canvas.canvas.ontouchend = endFunction
+        canvas.canvas.onmousemove = moveFunction
+        canvas.canvas.ontouchmove = moveFunction
+        canvas.canvas.onmouseleave = null
     }
 }
