@@ -1,32 +1,27 @@
-import Canvas from "../Canvas.js";
+import Canvas from "../../Element/Canvas.js";
 import ConfigContainer from "../../Config/ConfigContainer.js";
-import ConfigPanel from "../ConfigPanel.js";
-import DrawWithTemporaryImageActionButton from "./DrawWithTemporaryImageActionButton.js";
-import AppWindow from "../AppWindow.js";
+import AppWindow from "../../Element/AppWindow.js";
+import DrawWithTemporaryImageActionButton from "./DrawWithTemporaryImageStrategy.js";
 
-export default abstract class DrawWithTemporaryImageAndAnimationActionButton extends DrawWithTemporaryImageActionButton
+export default abstract class DrawWithAnimationStrategy extends DrawWithTemporaryImageActionButton
 {
     protected readonly RESET_TIME_AFTER_MILLIS: number = 1000000000
+    protected canvas: Canvas
+    protected configContainer: ConfigContainer
     protected time: number = 0
     protected currentPositionX: number
     protected currentPositionY: number
-
-    public constructor(
-        protected buttonElement: HTMLElement,
-        protected target: Canvas,
-        protected configContainer: ConfigContainer,
-        protected configPanel: ConfigPanel
-    ) {
-        super(buttonElement, target, configContainer, configPanel)
-    }
 
     protected abstract initContextProperties(): void
 
     protected abstract drawTo(xEnd: number, yEnd: number): void
 
-    public addListeners(): void
+    public setAction(canvas: Canvas, configContainer: ConfigContainer): void
     {
-        this.target.canvas.onmouseover = e => {
+        this.canvas = canvas
+        this.configContainer = configContainer
+
+        const overFunction = e => {
             let intervalId = setInterval(() => {
                 this.time += 0.001
                 if (this.time > this.RESET_TIME_AFTER_MILLIS) {
@@ -38,26 +33,39 @@ export default abstract class DrawWithTemporaryImageAndAnimationActionButton ext
             }, 1)
             AppWindow.getInstance().addIntervalId(intervalId)
         }
-        this.target.canvas.onmousedown = e => {
+
+        const startFunction = e => {
             this.lastMouseDownX = e.offsetX
             this.lastMouseDownY = e.offsetY
             this.pressed = true
             this.initContextProperties()
         }
-        this.target.canvas.onmousemove = e => {
+
+        const moveFunction = e => {
             this.currentPositionX = e.offsetX
             this.currentPositionY = e.offsetY
         }
-        this.target.canvas.onmouseup = e => {
+
+        const endFunction = e => {
             this.restoreLastImageIfPresentAndReset()
             this.drawTo(e.offsetX, e.offsetY)
             this.pressed = false
             this.additionalOnMouseUp()
         }
-        this.target.canvas.onmouseout = e => {
+
+        const leaveFunction = e => {
             this.restoreLastImageIfPresentAndReset()
             AppWindow.getInstance().clearIntervals()
         }
+
+        canvas.canvas.onmouseover = overFunction
+        canvas.canvas.onmousedown = startFunction
+        canvas.canvas.ontouchstart = startFunction
+        canvas.canvas.onmouseup = endFunction
+        canvas.canvas.ontouchend = endFunction
+        canvas.canvas.onmousemove = moveFunction
+        canvas.canvas.ontouchmove = moveFunction
+        canvas.canvas.onmouseleave = leaveFunction
     }
 
     protected additionalOnMouseUp(): void

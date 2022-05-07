@@ -1,34 +1,52 @@
-import DrawActionButton from "./DrawActionButton.js";
+import SetCanvasActionStrategy from "./SetCanvasActionStrategy.js";
+import Canvas from "../../Element/Canvas.js";
 import ConfigItem from "../../Config/ConfigItem.js";
-import f from '../../functions.js'
+import ConfigContainer from "../../Config/ConfigContainer.js";
 import Color from "../../Color.js";
 
-export default class RectangleBrushButton extends DrawActionButton
+export default class RectangleBrushStrategy implements SetCanvasActionStrategy
 {
     private readonly FPS: number = 60
     private lastX: number
     private lastY: number
     private pressed: boolean = false
+    private canvas: Canvas
+    private configContainer: ConfigContainer
 
-    public addListeners(): void
+    public setAction(canvas: Canvas, configContainer: ConfigContainer): void
     {
-        this.target.canvas.onmousedown = e => {
+        this.canvas = canvas
+        this.configContainer = configContainer
+
+        const startFunction = e => {
             this.lastX = e.offsetX
             this.lastY = e.offsetY
             this.pressed = true
+
             setInterval(() => {
                 if (this.pressed) {
                     this.drawSingleTick()
                 }
             }, 1000 / this.FPS)
         }
-        this.target.canvas.onmousemove = e => {
+
+        const endFunction = e => {
+            this.pressed = false
+        }
+
+        const moveFunction = e => {
             this.lastX = e.offsetX
             this.lastY = e.offsetY
         }
-        this.target.canvas.onmouseup = e => {
-            this.pressed = false
-        }
+
+        canvas.canvas.onmouseover = null
+        canvas.canvas.onmousedown = startFunction
+        canvas.canvas.ontouchstart = startFunction
+        canvas.canvas.onmouseup = endFunction
+        canvas.canvas.ontouchend = endFunction
+        canvas.canvas.onmousemove = moveFunction
+        canvas.canvas.ontouchmove = moveFunction
+        canvas.canvas.onmouseleave = null
     }
 
     private drawSingleTick(): void
@@ -41,8 +59,8 @@ export default class RectangleBrushButton extends DrawActionButton
         let elementRedSpreadLimit = this.configContainer.getValueAsNumber(ConfigItem.ELEMENT_RANDOM_RED_COLOR_SPREAD_PROPERTY)
         let elementGreenSpreadLimit = this.configContainer.getValueAsNumber(ConfigItem.ELEMENT_RANDOM_GREEN_COLOR_SPREAD_PROPERTY)
         let elementBlueSpreadLimit = this.configContainer.getValueAsNumber(ConfigItem.ELEMENT_RANDOM_BLUE_COLOR_SPREAD_PROPERTY)
-        this.target.ctx.lineWidth = this.configContainer.getLineWidth()
-        this.target.ctx.globalAlpha = this.configContainer.getValueAsNumber(ConfigItem.OPACITY_PROPERTY)
+        this.canvas.ctx.lineWidth = this.configContainer.getLineWidth()
+        this.canvas.ctx.globalAlpha = this.configContainer.getValueAsNumber(ConfigItem.OPACITY_PROPERTY)
 
         for (let i = 0; i < this.configContainer.getValueAsNumber(ConfigItem.TOUCHES_PER_TICK_PROPERTY); i++) {
             let color = new Color(this.configContainer.getValueByProperty(ConfigItem.COLOR_PROPERTY))
@@ -51,13 +69,13 @@ export default class RectangleBrushButton extends DrawActionButton
                 elementGreenSpreadLimit,
                 elementBlueSpreadLimit
             )
-            this.target.ctx.fillStyle = color.toString()
-            this.target.ctx.strokeStyle = color.toString()
+            this.canvas.ctx.fillStyle = color.toString()
+            this.canvas.ctx.strokeStyle = color.toString()
             let elementX = this.lastX - (brushWidth / 2) + Math.random() * (brushWidth - elementWidth)
             let elementY = this.lastY - (brushHeight / 2) + Math.random() * (brushHeight - elementHeight)
 
-            this.target.ctx.beginPath()
-            this.target.ctx.rect(
+            this.canvas.ctx.beginPath()
+            this.canvas.ctx.rect(
                 elementX,
                 elementY,
                 elementWidth,
@@ -65,9 +83,9 @@ export default class RectangleBrushButton extends DrawActionButton
             )
 
             if (contourOnly) {
-                this.target.ctx.stroke()
+                this.canvas.ctx.stroke()
             } else {
-                this.target.ctx.fill()
+                this.canvas.ctx.fill()
             }
         }
     }

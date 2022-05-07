@@ -1,9 +1,9 @@
-import ConfigItem from "../../../Config/ConfigItem.js";
-import Color from "../../../Color.js";
-import ColorFactory from "../../../ColorFactory.js";
-import Canvas from "../../Canvas.js";
-import ConfigContainer from "../../../Config/ConfigContainer.js";
-import InterpreterInterface from "../../../Dsl/Interpreter/InterpreterInterface.js";
+import ConfigContainer from "../../Config/ConfigContainer.js";
+import InterpreterInterface from "../../Dsl/Interpreter/InterpreterInterface.js";
+import ColorFactory from "../../ColorFactory.js";
+import Color from "../../Color.js";
+import ConfigItem from "../../Config/ConfigItem.js";
+import Canvas from "../../Element/Canvas";
 
 export default class ColorFunctionPartial
 {

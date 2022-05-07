@@ -1,0 +1,42 @@
+import ConfigItem from "../../Config/ConfigItem.js";
+import DefaultValueFunctionInterpreter from "../../Dsl/Interpreter/DefaultValueFunctionInterpreter.js";
+import DrawWithAnimationStrategy from "./DrawWithAnimationStrategy.js";
+import ColorFunctionPartial from "../Partial/ColorFunctionPartial.js";
+export default class AdvancedPencilStrategy extends DrawWithAnimationStrategy {
+    constructor(interpreter = new DefaultValueFunctionInterpreter()) {
+        super();
+        this.interpreter = interpreter;
+    }
+    setAction(canvas, configContainer) {
+        this.colorFunctionPartial = new ColorFunctionPartial(canvas, configContainer, this.interpreter);
+        super.setAction(canvas, configContainer);
+    }
+    initContextProperties() {
+        this.initLineWidth();
+        this.colorFunctionPartial.initColor(this.time);
+    }
+    drawTo(xEnd, yEnd) {
+        this.initLineWidth();
+        this.colorFunctionPartial.initColor(this.time);
+        this.canvas.ctx.lineCap = 'round';
+        this.canvas.ctx.beginPath();
+        this.canvas.ctx.moveTo(this.lastMouseDownX, this.lastMouseDownY);
+        this.canvas.ctx.lineTo(this.currentPositionX, this.currentPositionY);
+        this.canvas.ctx.stroke();
+        this.lastMouseDownX = this.currentPositionX;
+        this.lastMouseDownY = this.currentPositionY;
+    }
+    drawTemporaryTo(xEnd, yEnd) {
+        this.initLineWidth();
+        this.colorFunctionPartial.initColor(this.time);
+        this.canvas.ctx.beginPath();
+        this.canvas.ctx.ellipse(this.currentPositionX, this.currentPositionY, this.canvas.ctx.lineWidth / 2, this.canvas.ctx.lineWidth / 2, 0, 0, 2 * Math.PI);
+        this.canvas.ctx.closePath();
+        this.canvas.ctx.fill();
+    }
+    initLineWidth() {
+        let lineWidthFunction = this.configContainer.getValueByProperty(ConfigItem.LINE_WIDTH_FUNCTION_PROPERTY);
+        this.canvas.ctx.lineWidth = this.interpreter.interpret(lineWidthFunction, { $s: this.time });
+    }
+}
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiQWR2YW5jZWRQZW5jaWxTdHJhdGVneS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uLy4uL3NyYy9EcmF3L1N0cmF0ZWd5L0FkdmFuY2VkUGVuY2lsU3RyYXRlZ3kudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQ0EsT0FBTyxVQUFVLE1BQU0sNEJBQTRCLENBQUM7QUFHcEQsT0FBTywrQkFBK0IsTUFBTSwwREFBMEQsQ0FBQztBQUN2RyxPQUFPLHlCQUF5QixNQUFNLGdDQUFnQyxDQUFDO0FBQ3ZFLE9BQU8sb0JBQW9CLE1BQU0sb0NBQW9DLENBQUM7QUFFdEUsTUFBTSxDQUFDLE9BQU8sT0FBTyxzQkFBdUIsU0FBUSx5QkFBeUI7SUFNekUsWUFBNkIsY0FBb0MsSUFBSSwrQkFBK0IsRUFBRTtRQUVsRyxLQUFLLEVBQUUsQ0FBQTtRQUZrQixnQkFBVyxHQUFYLFdBQVcsQ0FBOEQ7SUFHdEcsQ0FBQztJQUVNLFNBQVMsQ0FBQyxNQUFjLEVBQUUsZUFBZ0M7UUFFN0QsSUFBSSxDQUFDLG9CQUFvQixHQUFHLElBQUksb0JBQW9CLENBQUMsTUFBTSxFQUFFLGVBQWUsRUFBRSxJQUFJLENBQUMsV0FBVyxDQUFDLENBQUE7UUFDL0YsS0FBSyxDQUFDLFNBQVMsQ0FBQyxNQUFNLEVBQUUsZUFBZSxDQUFDLENBQUE7SUFDNUMsQ0FBQztJQUVTLHFCQUFxQjtRQUUzQixJQUFJLENBQUMsYUFBYSxFQUFFLENBQUE7UUFDcEIsSUFBSSxDQUFDLG9CQUFvQixDQUFDLFNBQVMsQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLENBQUE7SUFDbEQsQ0FBQztJQUVTLE1BQU0sQ0FBQyxJQUFZLEVBQUUsSUFBWTtRQUV2QyxJQUFJLENBQUMsYUFBYSxFQUFFLENBQUE7UUFDcEIsSUFBSSxDQUFDLG9CQUFvQixDQUFDLFNBQVMsQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLENBQUE7UUFDOUMsSUFBSSxDQUFDLE1BQU0sQ0FBQyxHQUFHLENBQUMsT0FBTyxHQUFHLE9BQU8sQ0FBQTtRQUNqQyxJQUFJLENBQUMsTUFBTSxDQUFDLEdBQUcsQ0FBQyxTQUFTLEVBQUUsQ0FBQTtRQUMzQixJQUFJLENBQUMsTUFBTSxDQUFDLEdBQUcsQ0FBQyxNQUFNLENBQUMsSUFBSSxDQUFDLGNBQWMsRUFBRSxJQUFJLENBQUMsY0FBYyxDQUFDLENBQUE7UUFDaEUsSUFBSSxDQUFDLE1BQU0sQ0FBQyxHQUFHLENBQUMsTUFBTSxDQUFDLElBQUksQ0FBQyxnQkFBZ0IsRUFBRSxJQUFJLENBQUMsZ0JBQWdCLENBQUMsQ0FBQTtRQUNwRSxJQUFJLENBQUMsTUFBTSxDQUFDLEdBQUcsQ0FBQyxNQUFNLEVBQUUsQ0FBQTtRQUN4QixJQUFJLENBQUMsY0FBYyxHQUFHLElBQUksQ0FBQyxnQkFBZ0IsQ0FBQTtRQUMzQyxJQUFJLENBQUMsY0FBYyxHQUFHLElBQUksQ0FBQyxnQkFBZ0IsQ0FBQTtJQUMvQyxDQUFDO0lBRVMsZUFBZSxDQUFDLElBQVksRUFBRSxJQUFZO1FBRWhELElBQUksQ0FBQyxhQUFhLEVBQUUsQ0FBQTtRQUNwQixJQUFJLENBQUMsb0JBQW9CLENBQUMsU0FBUyxDQUFDLElBQUksQ0FBQyxJQUFJLENBQUMsQ0FBQTtRQUM5QyxJQUFJLENBQUMsTUFBTSxDQUFDLEdBQUcsQ0FBQyxTQUFTLEVBQUUsQ0FBQTtRQUMzQixJQUFJLENBQUMsTUFBTSxDQUFDLEdBQUcsQ0FBQyxPQUFPLENBQ25CLElBQUksQ0FBQyxnQkFBZ0IsRUFDckIsSUFBSSxDQUFDLGdCQUFnQixFQUNyQixJQUFJLENBQUMsTUFBTSxDQUFDLEdBQUcsQ0FBQyxTQUFTLEdBQUcsQ0FBQyxFQUM3QixJQUFJLENBQUMsTUFBTSxDQUFDLEdBQUcsQ0FBQyxTQUFTLEdBQUcsQ0FBQyxFQUM3QixDQUFDLEVBQ0QsQ0FBQyxFQUNELENBQUMsR0FBRyxJQUFJLENBQUMsRUFBRSxDQUNkLENBQUE7UUFDRCxJQUFJLENBQUMsTUFBTSxDQUFDLEdBQUcsQ0FBQyxTQUFTLEVBQUUsQ0FBQTtRQUMzQixJQUFJLENBQUMsTUFBTSxDQUFDLEdBQUcsQ0FBQyxJQUFJLEVBQUUsQ0FBQTtJQUMxQixDQUFDO0lBRVMsYUFBYTtRQUVuQixJQUFJLGlCQUFpQixHQUFHLElBQUksQ0FBQyxlQUFlLENBQUMsa0JBQWtCLENBQUMsVUFBVSxDQUFDLDRCQUE0QixDQUFDLENBQUE7UUFDeEcsSUFBSSxDQUFDLE1BQU0sQ0FBQyxHQUFHLENBQUMsU0FBUyxHQUFHLElBQUksQ0FBQyxXQUFXLENBQUMsU0FBUyxDQUFDLGlCQUFpQixFQUFFLEVBQUMsRUFBRSxFQUFFLElBQUksQ0FBQyxJQUFJLEVBQUMsQ0FBQyxDQUFBO0lBQzlGLENBQUM7Q0FDSiJ9

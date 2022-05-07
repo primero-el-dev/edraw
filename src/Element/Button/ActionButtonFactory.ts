@@ -1,27 +1,23 @@
-import PencilButton from "./PencilButton.js"
 import Canvas from "../Canvas.js";
 import ConfigContainer from "../../Config/ConfigContainer.js";
 import ConfigItem from "../../Config/ConfigItem.js";
 import ConfigPanel from "../ConfigPanel.js";
-import RectangleButton from "./RectangleButton.js";
-import CircleButton from "./CircleButton.js";
-import BrushButton from "./BrushButton.js";
 import HTMLElementFactory from "../HTMLElementFactory.js";
-import RectangleBrushButton from "./RectangleBrushButton.js";
-import LineButton from "./LineButton.js";
 import ExportButton from "./ExportButton.js";
-import PolygonBrushButton from "./PolygonBrushButton.js";
-import RotatingPencilButton from "./RotatingPencilButton.js";
-import BungeePencilButton from "./BungeePencilButton.js";
-import AdvancedPencilButton from "./AdvancedPencilButton.js";
-import AdvancedPolygonBrushButton from "./AdvancedPolygonBrushButton.js";
-import MoveButton from "./MoveButton.js";
 import ImportButton from "./ImportButton.js";
 import AboutButton from "./AboutButton.js";
 import DrawActionButton from "./DrawActionButton.js";
 import PencilStrategy from "../../Draw/Strategy/PencilStrategy.js";
 import LineStrategy from "../../Draw/Strategy/LineStrategy.js";
 import CircleStrategy from "../../Draw/Strategy/CircleStrategy.js";
+import RectangleStrategy from "../../Draw/Strategy/RectangleStrategy.js";
+import BrushStrategy from "../../Draw/Strategy/BrushStrategy.js";
+import RectangleBrushStrategy from "../../Draw/Strategy/RectangleBrushStrategy.js";
+import AdvancedPencilStrategy from "../../Draw/Strategy/AdvancedPencilStrategy.js";
+import AdvancedPolygonBrushStrategy from "../../Draw/Strategy/AdvancedPolygonBrushStrategy.js";
+import PolygonBrushStrategy from "../../Draw/Strategy/PolygonBrushStrategy.js";
+import BungeePencilStrategy from "../../Draw/Strategy/BungeePencilStrategy.js";
+import RotatingPencilStrategy from "../../Draw/Strategy/RotatingPencilStrategy.js";
 
 export default class ActionButtonFactory
 {
@@ -50,17 +46,6 @@ export default class ActionButtonFactory
         return new DrawActionButton(button, this.canvas, newContainer, this.configPanel, new PencilStrategy())
     }
 
-    // public createMoveButton(): MoveButton
-    // {
-    //     let button = HTMLElementFactory.createActionButton('move', 'move')
-    //     let newContainer = this.configContainer.getWithProperties([
-    //         ConfigItem.CANVAS_WIDTH_PROPERTY,
-    //         ConfigItem.CANVAS_HEIGHT_PROPERTY,
-    //     ])
-    //
-    //     return new MoveButton(button, this.canvas, newContainer, this.configPanel)
-    // }
-
     public createLineButton(): DrawActionButton
     {
         let button = HTMLElementFactory.createActionButton('line', 'line')
@@ -74,18 +59,18 @@ export default class ActionButtonFactory
         return new DrawActionButton(button, this.canvas, newContainer, this.configPanel, new LineStrategy())
     }
 
-    // public createRectangleButton(): RectangleButton
-    // {
-    //     let button = HTMLElementFactory.createActionButton('rectangle', 'rectangle')
-    //     let newContainer = this.configContainer.getWithProperties([
-    //         ConfigItem.LINE_WIDTH_PROPERTY,
-    //         ConfigItem.COLOR_PROPERTY,
-    //         ConfigItem.OPACITY_PROPERTY,
-    //         ConfigItem.CONTOUR_PROPERTY,
-    //     ])
-    //
-    //     return new RectangleButton(button, this.canvas, newContainer, this.configPanel)
-    // }
+    public createRectangleButton(): DrawActionButton
+    {
+        let button = HTMLElementFactory.createActionButton('rectangle', 'rectangle')
+        let newContainer = this.configContainer.getWithProperties([
+            ConfigItem.LINE_WIDTH_PROPERTY,
+            ConfigItem.COLOR_PROPERTY,
+            ConfigItem.OPACITY_PROPERTY,
+            ConfigItem.CONTOUR_PROPERTY,
+        ])
+
+        return new DrawActionButton(button, this.canvas, newContainer, this.configPanel, new RectangleStrategy())
+    }
 
     public createCircleButton(): DrawActionButton
     {
@@ -100,133 +85,133 @@ export default class ActionButtonFactory
         return new DrawActionButton(button, this.canvas, newContainer, this.configPanel, new CircleStrategy())
     }
 
-    // public createBrushButton(): BrushButton
-    // {
-    //     let button = HTMLElementFactory.createActionButton('brush', 'brush')
-    //     let newContainer = this.configContainer.getWithProperties([
-    //         ConfigItem.COLOR_PROPERTY,
-    //         ConfigItem.OPACITY_PROPERTY,
-    //         ConfigItem.TOUCHES_PER_TICK_PROPERTY,
-    //         ConfigItem.BRUSH_AREA_DIAMETER_PROPERTY,
-    //         ConfigItem.ELEMENT_DIAMETER_PROPERTY,
-    //     ])
-    //
-    //     return new BrushButton(button, this.canvas, newContainer, this.configPanel)
-    // }
-    //
-    // public createRectangleBrushButton(): RectangleBrushButton
-    // {
-    //     let button = HTMLElementFactory.createActionButton('rectangle brush', 'rectangle brush')
-    //     let newContainer = this.configContainer.getWithProperties([
-    //         ConfigItem.LINE_WIDTH_PROPERTY,
-    //         ConfigItem.COLOR_PROPERTY,
-    //         ConfigItem.OPACITY_PROPERTY,
-    //         ConfigItem.CONTOUR_PROPERTY,
-    //         ConfigItem.TOUCHES_PER_TICK_PROPERTY,
-    //         ConfigItem.BRUSH_AREA_WIDTH_PROPERTY,
-    //         ConfigItem.BRUSH_AREA_HEIGHT_PROPERTY,
-    //         ConfigItem.ELEMENT_WIDTH_PROPERTY,
-    //         ConfigItem.ELEMENT_HEIGHT_PROPERTY,
-    //         ConfigItem.ELEMENT_RANDOM_RED_COLOR_SPREAD_PROPERTY,
-    //         ConfigItem.ELEMENT_RANDOM_GREEN_COLOR_SPREAD_PROPERTY,
-    //         ConfigItem.ELEMENT_RANDOM_BLUE_COLOR_SPREAD_PROPERTY,
-    //     ])
-    //
-    //     return new RectangleBrushButton(button, this.canvas, newContainer, this.configPanel)
-    // }
-    //
-    // public createPolygonBrushButton(): PolygonBrushButton
-    // {
-    //     let button = HTMLElementFactory.createActionButton('polygon brush', 'polygon brush')
-    //     let newContainer = this.configContainer.getWithProperties([
-    //         ConfigItem.COLOR_PROPERTY,
-    //         ConfigItem.OPACITY_PROPERTY,
-    //         ConfigItem.LINE_WIDTH_PROPERTY,
-    //         ConfigItem.CONTOUR_PROPERTY,
-    //         ConfigItem.TOUCHES_PER_TICK_PROPERTY,
-    //         ConfigItem.BRUSH_AREA_DIAMETER_PROPERTY,
-    //         ConfigItem.ELEMENT_DIAMETER_PROPERTY,
-    //         ConfigItem.ELEMENT_ROTATION_PROPERTY,
-    //         ConfigItem.ELEMENT_EDGES_COUNT_PROPERTY,
-    //         ConfigItem.ELEMENT_RANDOM_RED_COLOR_SPREAD_PROPERTY,
-    //         ConfigItem.ELEMENT_RANDOM_GREEN_COLOR_SPREAD_PROPERTY,
-    //         ConfigItem.ELEMENT_RANDOM_BLUE_COLOR_SPREAD_PROPERTY,
-    //     ])
-    //
-    //     return new PolygonBrushButton(button, this.canvas, newContainer, this.configPanel)
-    // }
-    //
-    // public createRotatingPencilButton(): RotatingPencilButton
-    // {
-    //     let button = HTMLElementFactory.createActionButton('rotating pencil', 'rotating pencil')
-    //     let newContainer = this.configContainer.getWithProperties([
-    //         ConfigItem.LINE_WIDTH_PROPERTY,
-    //         ConfigItem.COLOR_PROPERTY,
-    //         ConfigItem.OPACITY_PROPERTY,
-    //         ConfigItem.ELEMENT_DIAMETER_PROPERTY,
-    //         ConfigItem.ELEMENT_DISTANCE_FROM_CLICK_PROPERTY,
-    //         ConfigItem.ELEMENT_LAPS_PER_SECOND_PROPERTY,
-    //     ])
-    //
-    //     return new RotatingPencilButton(button, this.canvas, newContainer, this.configPanel)
-    // }
-    //
-    // public createBungeePencilButton(): BungeePencilButton
-    // {
-    //     let button = HTMLElementFactory.createActionButton('bungee pencil', 'bungee pencil')
-    //     let newContainer = this.configContainer.getWithProperties([
-    //         ConfigItem.LINE_WIDTH_PROPERTY,
-    //         ConfigItem.STRIPED_LINE_PROPERTY,
-    //         ConfigItem.COLOR_PROPERTY,
-    //         ConfigItem.OPACITY_PROPERTY,
-    //         ConfigItem.GUM_ELASTICITY_PROPERTY,
-    //         ConfigItem.STRIPE_LINE_LENGTH_PROPERTY,
-    //         ConfigItem.STRIPE_GAP_LENGTH_PROPERTY,
-    //     ])
-    //
-    //     return new BungeePencilButton(button, this.canvas, newContainer, this.configPanel)
-    // }
-    //
-    // public createAdvancedPencilButton(): AdvancedPencilButton
-    // {
-    //     let button = HTMLElementFactory.createActionButton('advanced pencil', 'advanced pencil')
-    //     let newContainer = this.configContainer.getWithProperties([
-    //         ConfigItem.LINE_WIDTH_FUNCTION_PROPERTY,
-    //         ConfigItem.COLOR_PROPERTY,
-    //         ConfigItem.OPACITY_PROPERTY,
-    //         ConfigItem.COLOR_FUNCTION_ENABLED_PROPERTY,
-    //         ConfigItem.RED_VALUE_FUNCTION_PROPERTY,
-    //         ConfigItem.GREEN_VALUE_FUNCTION_PROPERTY,
-    //         ConfigItem.BLUE_VALUE_FUNCTION_PROPERTY,
-    //         ConfigItem.OPACITY_FUNCTION_PROPERTY,
-    //     ])
-    //
-    //     return new AdvancedPencilButton(button, this.canvas, newContainer, this.configPanel)
-    // }
-    //
-    // public createAdvancedPolygonBrushButton(): AdvancedPolygonBrushButton
-    // {
-    //     let button = HTMLElementFactory.createActionButton('advanced polygon brush', 'advanced polygon brush')
-    //     let newContainer = this.configContainer.getWithProperties([
-    //         ConfigItem.LINE_WIDTH_FUNCTION_PROPERTY,
-    //         ConfigItem.ELEMENT_DIAMETER_FUNCTION_PROPERTY,
-    //         ConfigItem.CONTOUR_PROPERTY,
-    //         ConfigItem.TOUCHES_PER_TICK_PROPERTY,
-    //         ConfigItem.BRUSH_AREA_DIAMETER_PROPERTY,
-    //         ConfigItem.ELEMENT_DIAMETER_PROPERTY,
-    //         ConfigItem.ELEMENT_EDGES_COUNT_PROPERTY,
-    //         ConfigItem.COLOR_PROPERTY,
-    //         ConfigItem.OPACITY_PROPERTY,
-    //         ConfigItem.COLOR_FUNCTION_ENABLED_PROPERTY,
-    //         ConfigItem.RED_VALUE_FUNCTION_PROPERTY,
-    //         ConfigItem.GREEN_VALUE_FUNCTION_PROPERTY,
-    //         ConfigItem.BLUE_VALUE_FUNCTION_PROPERTY,
-    //         ConfigItem.OPACITY_FUNCTION_PROPERTY,
-    //         ConfigItem.ELEMENT_ROTATION_FUNCTION_PROPERTY,
-    //     ])
-    //
-    //     return new AdvancedPolygonBrushButton(button, this.canvas, newContainer, this.configPanel)
-    // }
+    public createBrushButton(): DrawActionButton
+    {
+        let button = HTMLElementFactory.createActionButton('brush', 'brush')
+        let newContainer = this.configContainer.getWithProperties([
+            ConfigItem.COLOR_PROPERTY,
+            ConfigItem.OPACITY_PROPERTY,
+            ConfigItem.TOUCHES_PER_TICK_PROPERTY,
+            ConfigItem.BRUSH_AREA_DIAMETER_PROPERTY,
+            ConfigItem.ELEMENT_DIAMETER_PROPERTY,
+        ])
+
+        return new DrawActionButton(button, this.canvas, newContainer, this.configPanel, new BrushStrategy())
+    }
+
+    public createRectangleBrushButton(): DrawActionButton
+    {
+        let button = HTMLElementFactory.createActionButton('rectangle brush', 'rectangle brush')
+        let newContainer = this.configContainer.getWithProperties([
+            ConfigItem.LINE_WIDTH_PROPERTY,
+            ConfigItem.COLOR_PROPERTY,
+            ConfigItem.OPACITY_PROPERTY,
+            ConfigItem.CONTOUR_PROPERTY,
+            ConfigItem.TOUCHES_PER_TICK_PROPERTY,
+            ConfigItem.BRUSH_AREA_WIDTH_PROPERTY,
+            ConfigItem.BRUSH_AREA_HEIGHT_PROPERTY,
+            ConfigItem.ELEMENT_WIDTH_PROPERTY,
+            ConfigItem.ELEMENT_HEIGHT_PROPERTY,
+            ConfigItem.ELEMENT_RANDOM_RED_COLOR_SPREAD_PROPERTY,
+            ConfigItem.ELEMENT_RANDOM_GREEN_COLOR_SPREAD_PROPERTY,
+            ConfigItem.ELEMENT_RANDOM_BLUE_COLOR_SPREAD_PROPERTY,
+        ])
+
+        return new DrawActionButton(button, this.canvas, newContainer, this.configPanel, new RectangleBrushStrategy())
+    }
+
+    public createPolygonBrushButton(): DrawActionButton
+    {
+        let button = HTMLElementFactory.createActionButton('polygon brush', 'polygon brush')
+        let newContainer = this.configContainer.getWithProperties([
+            ConfigItem.COLOR_PROPERTY,
+            ConfigItem.OPACITY_PROPERTY,
+            ConfigItem.LINE_WIDTH_PROPERTY,
+            ConfigItem.CONTOUR_PROPERTY,
+            ConfigItem.TOUCHES_PER_TICK_PROPERTY,
+            ConfigItem.BRUSH_AREA_DIAMETER_PROPERTY,
+            ConfigItem.ELEMENT_DIAMETER_PROPERTY,
+            ConfigItem.ELEMENT_ROTATION_PROPERTY,
+            ConfigItem.ELEMENT_EDGES_COUNT_PROPERTY,
+            ConfigItem.ELEMENT_RANDOM_RED_COLOR_SPREAD_PROPERTY,
+            ConfigItem.ELEMENT_RANDOM_GREEN_COLOR_SPREAD_PROPERTY,
+            ConfigItem.ELEMENT_RANDOM_BLUE_COLOR_SPREAD_PROPERTY,
+        ])
+
+        return new DrawActionButton(button, this.canvas, newContainer, this.configPanel, new PolygonBrushStrategy())
+    }
+
+    public createRotatingPencilButton(): DrawActionButton
+    {
+        let button = HTMLElementFactory.createActionButton('rotating pencil', 'rotating pencil')
+        let newContainer = this.configContainer.getWithProperties([
+            ConfigItem.LINE_WIDTH_PROPERTY,
+            ConfigItem.COLOR_PROPERTY,
+            ConfigItem.OPACITY_PROPERTY,
+            ConfigItem.ELEMENT_DIAMETER_PROPERTY,
+            ConfigItem.ELEMENT_DISTANCE_FROM_CLICK_PROPERTY,
+            ConfigItem.ELEMENT_LAPS_PER_SECOND_PROPERTY,
+        ])
+
+        return new DrawActionButton(button, this.canvas, newContainer, this.configPanel, new RotatingPencilStrategy())
+    }
+
+    public createBungeePencilButton(): DrawActionButton
+    {
+        let button = HTMLElementFactory.createActionButton('bungee pencil', 'bungee pencil')
+        let newContainer = this.configContainer.getWithProperties([
+            ConfigItem.LINE_WIDTH_PROPERTY,
+            ConfigItem.STRIPED_LINE_PROPERTY,
+            ConfigItem.COLOR_PROPERTY,
+            ConfigItem.OPACITY_PROPERTY,
+            ConfigItem.GUM_ELASTICITY_PROPERTY,
+            ConfigItem.STRIPE_LINE_LENGTH_PROPERTY,
+            ConfigItem.STRIPE_GAP_LENGTH_PROPERTY,
+        ])
+
+        return new DrawActionButton(button, this.canvas, newContainer, this.configPanel, new BungeePencilStrategy())
+    }
+
+    public createAdvancedPencilButton(): DrawActionButton
+    {
+        let button = HTMLElementFactory.createActionButton('advanced pencil', 'advanced pencil')
+        let newContainer = this.configContainer.getWithProperties([
+            ConfigItem.LINE_WIDTH_FUNCTION_PROPERTY,
+            ConfigItem.COLOR_PROPERTY,
+            ConfigItem.OPACITY_PROPERTY,
+            ConfigItem.COLOR_FUNCTION_ENABLED_PROPERTY,
+            ConfigItem.RED_VALUE_FUNCTION_PROPERTY,
+            ConfigItem.GREEN_VALUE_FUNCTION_PROPERTY,
+            ConfigItem.BLUE_VALUE_FUNCTION_PROPERTY,
+            ConfigItem.OPACITY_FUNCTION_PROPERTY,
+        ])
+
+        return new DrawActionButton(button, this.canvas, newContainer, this.configPanel, new AdvancedPencilStrategy())
+    }
+
+    public createAdvancedPolygonBrushButton(): DrawActionButton
+    {
+        let button = HTMLElementFactory.createActionButton('advanced polygon brush', 'advanced polygon brush')
+        let newContainer = this.configContainer.getWithProperties([
+            ConfigItem.LINE_WIDTH_FUNCTION_PROPERTY,
+            ConfigItem.ELEMENT_DIAMETER_FUNCTION_PROPERTY,
+            ConfigItem.CONTOUR_PROPERTY,
+            ConfigItem.TOUCHES_PER_TICK_PROPERTY,
+            ConfigItem.BRUSH_AREA_DIAMETER_PROPERTY,
+            ConfigItem.ELEMENT_DIAMETER_PROPERTY,
+            ConfigItem.ELEMENT_EDGES_COUNT_PROPERTY,
+            ConfigItem.COLOR_PROPERTY,
+            ConfigItem.OPACITY_PROPERTY,
+            ConfigItem.COLOR_FUNCTION_ENABLED_PROPERTY,
+            ConfigItem.RED_VALUE_FUNCTION_PROPERTY,
+            ConfigItem.GREEN_VALUE_FUNCTION_PROPERTY,
+            ConfigItem.BLUE_VALUE_FUNCTION_PROPERTY,
+            ConfigItem.OPACITY_FUNCTION_PROPERTY,
+            ConfigItem.ELEMENT_ROTATION_FUNCTION_PROPERTY,
+        ])
+
+        return new DrawActionButton(button, this.canvas, newContainer, this.configPanel, new AdvancedPolygonBrushStrategy())
+    }
 
     public createImportButton(): ImportButton
     {

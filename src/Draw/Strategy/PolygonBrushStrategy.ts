@@ -1,34 +1,65 @@
-import DrawActionButton from "./DrawActionButton.js";
+import Canvas from "../../Element/Canvas.js";
 import ConfigItem from "../../Config/ConfigItem.js";
-import f from '../../functions.js'
+import ConfigContainer from "../../Config/ConfigContainer.js";
+import InterpreterInterface from "../../Dsl/Interpreter/InterpreterInterface.js";
+import DefaultValueFunctionInterpreter from "../../Dsl/Interpreter/DefaultValueFunctionInterpreter.js";
+import DrawStrategy from "./DrawStrategy.js";
 import Color from "../../Color.js";
+import ColorFunctionWithContourOptionPartial from "../Partial/ColorFunctionWithContourPartial.js";
 
-export default class PolygonBrushButton extends DrawActionButton
+export default class PolygonBrushStrategy implements DrawStrategy
 {
     private readonly FPS: number = 60
     private lastX: number
     private lastY: number
     private pressed: boolean = false
+    private canvas: Canvas
+    private configContainer: ConfigContainer
+    protected colorFunctionWithContourPartial: ColorFunctionWithContourOptionPartial
+    protected time: number = 0
 
-    public addListeners(): void
+    public constructor(protected interpreter: InterpreterInterface = new DefaultValueFunctionInterpreter())
     {
-        this.target.canvas.onmousedown = e => {
+        setInterval(() => {
+            this.time += 1
+        }, 1)
+    }
+
+    public setAction(canvas: Canvas, configContainer: ConfigContainer): void
+    {
+        this.colorFunctionWithContourPartial = new ColorFunctionWithContourOptionPartial(canvas, configContainer, this.interpreter)
+        this.canvas = canvas
+        this.configContainer = configContainer
+
+        const startFunction = e => {
             this.lastX = e.offsetX
             this.lastY = e.offsetY
             this.pressed = true
+
             setInterval(() => {
                 if (this.pressed) {
                     this.drawSingleTick()
                 }
             }, 1000 / this.FPS)
         }
-        this.target.canvas.onmousemove = e => {
+
+        const endFunction = e => {
+            this.pressed = false
+        }
+
+        const moveFunction = e => {
             this.lastX = e.offsetX
             this.lastY = e.offsetY
         }
-        this.target.canvas.onmouseup = e => {
-            this.pressed = false
-        }
+
+        canvas.canvas.onmouseover = null
+        canvas.canvas.onmousedown = startFunction
+        canvas.canvas.ontouchstart = startFunction
+        canvas.canvas.onmouseup = endFunction
+        canvas.canvas.ontouchend = endFunction
+        canvas.canvas.onmousemove = moveFunction
+        canvas.canvas.ontouchmove = moveFunction
+        canvas.canvas.onmouseleave = null
     }
 
     private drawSingleTick(): void
@@ -43,8 +74,8 @@ export default class PolygonBrushButton extends DrawActionButton
         let elementBlueSpreadLimit = this.configContainer.getValueAsNumber(ConfigItem.ELEMENT_RANDOM_BLUE_COLOR_SPREAD_PROPERTY)
         let opacity = this.configContainer.getValueAsNumber(ConfigItem.OPACITY_PROPERTY)
 
-        this.target.ctx.globalAlpha = this.configContainer.getValueAsNumber(ConfigItem.OPACITY_PROPERTY)
-        this.target.ctx.lineWidth = contourOnly ? this.configContainer.getLineWidth() : 1
+        this.canvas.ctx.globalAlpha = this.configContainer.getValueAsNumber(ConfigItem.OPACITY_PROPERTY)
+        this.canvas.ctx.lineWidth = contourOnly ? this.configContainer.getLineWidth() : 1
 
         let getNthAngle = (n: number): number => 2 * Math.PI * ((elementRotateAngle / 360) + (n / elementEdgesCount))
 
@@ -61,24 +92,24 @@ export default class PolygonBrushButton extends DrawActionButton
                 elementBlueSpreadLimit
             )
 
-            this.target.ctx.fillStyle = color.toDecmalStringWithOpacity(opacity)
-            this.target.ctx.strokeStyle = contourOnly ? color.toDecmalStringWithOpacity(opacity) : 'transparent'
-            this.target.ctx.beginPath()
-            this.target.ctx.moveTo(
+            this.canvas.ctx.fillStyle = color.toDecmalStringWithOpacity(opacity)
+            this.canvas.ctx.strokeStyle = contourOnly ? color.toDecmalStringWithOpacity(opacity) : 'transparent'
+            this.canvas.ctx.beginPath()
+            this.canvas.ctx.moveTo(
                 elementX + Math.sin(getNthAngle(0)) * (elementDiameter / 2),
                 elementY - Math.cos(getNthAngle(0)) * (elementDiameter / 2)
             )
             for (let j = 0; j <= elementEdgesCount + 1; j++) {
-                this.target.ctx.lineTo(
+                this.canvas.ctx.lineTo(
                     elementX + Math.sin(getNthAngle(j)) * (elementDiameter / 2),
                     elementY - Math.cos(getNthAngle(j)) * (elementDiameter / 2)
                 )
-                this.target.ctx.stroke()
+                this.canvas.ctx.stroke()
             }
-            this.target.ctx.closePath()
+            this.canvas.ctx.closePath()
 
             if (!contourOnly) {
-                this.target.ctx.fill()
+                this.canvas.ctx.fill()
             }
         }
     }

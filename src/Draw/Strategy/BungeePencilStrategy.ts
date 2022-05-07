@@ -1,7 +1,7 @@
+import DrawWithAnimationStrategy from "./DrawWithAnimationStrategy.js";
 import ConfigItem from "../../Config/ConfigItem.js";
-import DrawWithTemporaryImageAndAnimationActionButton from "./DrawWithTemporaryImageAndAnimationActionButton.js";
 
-export default class BungeePencilButton extends DrawWithTemporaryImageAndAnimationActionButton
+export default class BungeePencilStrategy extends DrawWithAnimationStrategy
 {
     protected readonly BASE_ELASTICITY = 0.897
     protected lineLength: number = 0
@@ -18,12 +18,12 @@ export default class BungeePencilButton extends DrawWithTemporaryImageAndAnimati
         let lineLength = this.configContainer.getValueAsNumber(ConfigItem.STRIPE_GAP_LENGTH_PROPERTY)
         let gapLength = this.configContainer.getValueAsNumber(ConfigItem.STRIPE_GAP_LENGTH_PROPERTY)
         this.striped = this.configContainer.getValueAsBoolean(ConfigItem.STRIPED_LINE_PROPERTY)
-        this.target.ctx.lineWidth = this.configContainer.getValueAsNumber(ConfigItem.LINE_WIDTH_PROPERTY)
-        this.target.ctx.lineCap = this.striped ? 'butt' : 'round'
-        this.target.ctx.setLineDash(this.striped ? [lineLength, gapLength] : [])
-        this.target.ctx.globalAlpha = this.configContainer.getValueAsNumber(ConfigItem.OPACITY_PROPERTY)
-        this.target.ctx.fillStyle = this.configContainer.getValueByProperty(ConfigItem.COLOR_PROPERTY)
-        this.target.ctx.strokeStyle = this.configContainer.getValueByProperty(ConfigItem.COLOR_PROPERTY)
+        this.canvas.ctx.lineWidth = this.configContainer.getValueAsNumber(ConfigItem.LINE_WIDTH_PROPERTY)
+        this.canvas.ctx.lineCap = this.striped ? 'butt' : 'round'
+        this.canvas.ctx.setLineDash(this.striped ? [lineLength, gapLength] : [])
+        this.canvas.ctx.globalAlpha = this.configContainer.getValueAsNumber(ConfigItem.OPACITY_PROPERTY)
+        this.canvas.ctx.fillStyle = this.configContainer.getValueByProperty(ConfigItem.COLOR_PROPERTY)
+        this.canvas.ctx.strokeStyle = this.configContainer.getValueByProperty(ConfigItem.COLOR_PROPERTY)
     }
 
     protected additionalOnMouseUp(): void
@@ -38,29 +38,29 @@ export default class BungeePencilButton extends DrawWithTemporaryImageAndAnimati
     {
         this.adjustParams(xEnd, yEnd)
 
-        this.target.ctx.beginPath()
-        this.target.ctx.ellipse(
+        this.canvas.ctx.beginPath()
+        this.canvas.ctx.ellipse(
             this.ballX,
             this.ballY,
-            this.target.ctx.lineWidth / 2,
-            this.target.ctx.lineWidth / 2,
+            this.canvas.ctx.lineWidth / 2,
+            this.canvas.ctx.lineWidth / 2,
             0,
             0,
             2 * Math.PI
         )
-        this.target.ctx.fill()
-        this.target.ctx.closePath()
+        this.canvas.ctx.fill()
+        this.canvas.ctx.closePath()
     }
 
     protected drawTo(xEnd: number, yEnd: number): void
     {
         this.adjustParams(xEnd, yEnd)
 
-        this.target.ctx.beginPath()
-        this.target.ctx.moveTo(this.lastDrawnBallX || this.ballX, this.lastDrawnBallY || this.ballY)
-        this.target.ctx.lineTo(this.ballX, this.ballY)
-        this.target.ctx.stroke()
-        this.target.ctx.closePath()
+        this.canvas.ctx.beginPath()
+        this.canvas.ctx.moveTo(this.lastDrawnBallX || this.ballX, this.lastDrawnBallY || this.ballY)
+        this.canvas.ctx.lineTo(this.ballX, this.ballY)
+        this.canvas.ctx.stroke()
+        this.canvas.ctx.closePath()
 
         this.lastMouseDownX = xEnd
         this.lastMouseDownY = yEnd

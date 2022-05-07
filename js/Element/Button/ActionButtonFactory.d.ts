@@ -13,7 +13,15 @@ export default class ActionButtonFactory {
     createAboutButton(): AboutButton;
     createPencilButton(): DrawActionButton;
     createLineButton(): DrawActionButton;
+    createRectangleButton(): DrawActionButton;
     createCircleButton(): DrawActionButton;
+    createBrushButton(): DrawActionButton;
+    createRectangleBrushButton(): DrawActionButton;
+    createPolygonBrushButton(): DrawActionButton;
+    createRotatingPencilButton(): DrawActionButton;
+    createBungeePencilButton(): DrawActionButton;
+    createAdvancedPencilButton(): DrawActionButton;
+    createAdvancedPolygonBrushButton(): DrawActionButton;
     createImportButton(): ImportButton;
     createExportButton(): ExportButton;
 }

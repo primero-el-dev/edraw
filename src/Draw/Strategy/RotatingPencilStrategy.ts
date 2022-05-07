@@ -1,14 +1,14 @@
+import DrawWithAnimationStrategy from "./DrawWithAnimationStrategy.js";
 import ConfigItem from "../../Config/ConfigItem.js";
-import DrawWithTemporaryImageAndAnimationActionButton from "./DrawWithTemporaryImageAndAnimationActionButton.js";
 
-export default class RotatingPencilButton extends DrawWithTemporaryImageAndAnimationActionButton
+export default class RotatingPencilStrategy extends DrawWithAnimationStrategy
 {
     protected initContextProperties(): void
     {
-        this.target.ctx.lineWidth = this.configContainer.getValueAsNumber(ConfigItem.LINE_WIDTH_PROPERTY)
-        this.target.ctx.globalAlpha = this.configContainer.getValueAsNumber(ConfigItem.OPACITY_PROPERTY)
-        this.target.ctx.fillStyle = this.configContainer.getValueByProperty(ConfigItem.COLOR_PROPERTY)
-        this.target.ctx.strokeStyle = this.configContainer.getValueByProperty(ConfigItem.COLOR_PROPERTY)
+        this.canvas.ctx.lineWidth = this.configContainer.getValueAsNumber(ConfigItem.LINE_WIDTH_PROPERTY)
+        this.canvas.ctx.globalAlpha = this.configContainer.getValueAsNumber(ConfigItem.OPACITY_PROPERTY)
+        this.canvas.ctx.fillStyle = this.configContainer.getValueByProperty(ConfigItem.COLOR_PROPERTY)
+        this.canvas.ctx.strokeStyle = this.configContainer.getValueByProperty(ConfigItem.COLOR_PROPERTY)
     }
 
     protected drawTo(xEnd: number, yEnd: number): void
@@ -19,17 +19,17 @@ export default class RotatingPencilButton extends DrawWithTemporaryImageAndAnima
         let distanceX = Math.sin(lapsPerSeconds * this.time * Math.PI * 8) * distanceFromClick
         let distanceY = Math.cos(lapsPerSeconds * this.time * Math.PI * 8) * distanceFromClick
 
-        this.target.ctx.beginPath()
-        this.target.ctx.ellipse(
+        this.canvas.ctx.beginPath()
+        this.canvas.ctx.ellipse(
             this.currentPositionX + distanceX,
             this.currentPositionY + distanceY,
-             elementDiameter / 2,
+            elementDiameter / 2,
             elementDiameter / 2,
             0,
             0,
             2 * Math.PI
         )
-        this.target.ctx.closePath()
-        this.target.ctx.fill()
+        this.canvas.ctx.closePath()
+        this.canvas.ctx.fill()
     }
 }
