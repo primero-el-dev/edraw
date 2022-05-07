@@ -1,23 +1,23 @@
-import PencilButton from "./PencilButton.js"
 import Canvas from "../Canvas.js";
 import ConfigContainer from "../../Config/ConfigContainer.js";
 import ConfigItem from "../../Config/ConfigItem.js";
 import ConfigPanel from "../ConfigPanel.js";
-import RectangleButton from "./RectangleButton.js";
-import CircleButton from "./CircleButton.js";
-import BrushButton from "./BrushButton.js";
 import HTMLElementFactory from "../HTMLElementFactory.js";
-import RectangleBrushButton from "./RectangleBrushButton.js";
-import LineButton from "./LineButton.js";
 import ExportButton from "./ExportButton.js";
-import PolygonBrushButton from "./PolygonBrushButton.js";
-import RotatingPencilButton from "./RotatingPencilButton.js";
-import BungeePencilButton from "./BungeePencilButton.js";
-import AdvancedPencilButton from "./AdvancedPencilButton.js";
-import AdvancedPolygonBrushButton from "./AdvancedPolygonBrushButton.js";
-import MoveButton from "./MoveButton.js";
 import ImportButton from "./ImportButton.js";
 import AboutButton from "./AboutButton.js";
+import DrawActionButton from "./DrawActionButton.js";
+import PencilStrategy from "../../Draw/Strategy/PencilStrategy.js";
+import LineStrategy from "../../Draw/Strategy/LineStrategy.js";
+import CircleStrategy from "../../Draw/Strategy/CircleStrategy.js";
+import RectangleStrategy from "../../Draw/Strategy/RectangleStrategy.js";
+import BrushStrategy from "../../Draw/Strategy/BrushStrategy.js";
+import RectangleBrushStrategy from "../../Draw/Strategy/RectangleBrushStrategy.js";
+import AdvancedPencilStrategy from "../../Draw/Strategy/AdvancedPencilStrategy.js";
+import AdvancedPolygonBrushStrategy from "../../Draw/Strategy/AdvancedPolygonBrushStrategy.js";
+import PolygonBrushStrategy from "../../Draw/Strategy/PolygonBrushStrategy.js";
+import BungeePencilStrategy from "../../Draw/Strategy/BungeePencilStrategy.js";
+import RotatingPencilStrategy from "../../Draw/Strategy/RotatingPencilStrategy.js";
 
 export default class ActionButtonFactory
 {
@@ -34,7 +34,7 @@ export default class ActionButtonFactory
         return new AboutButton(button)
     }
 
-    public createPencilButton(): PencilButton
+    public createPencilButton(): DrawActionButton
     {
         let button = HTMLElementFactory.createActionButton('pencil', 'pencil')
         let newContainer = this.configContainer.getWithProperties([
@@ -43,21 +43,10 @@ export default class ActionButtonFactory
             ConfigItem.COLOR_PROPERTY,
         ])
 
-        return new PencilButton(button, this.canvas, newContainer, this.configPanel)
+        return new DrawActionButton(button, this.canvas, newContainer, this.configPanel, new PencilStrategy())
     }
 
-    public createMoveButton(): MoveButton
-    {
-        let button = HTMLElementFactory.createActionButton('move', 'move')
-        let newContainer = this.configContainer.getWithProperties([
-            ConfigItem.CANVAS_WIDTH_PROPERTY,
-            ConfigItem.CANVAS_HEIGHT_PROPERTY,
-        ])
-
-        return new MoveButton(button, this.canvas, newContainer, this.configPanel)
-    }
-
-    public createLineButton(): LineButton
+    public createLineButton(): DrawActionButton
     {
         let button = HTMLElementFactory.createActionButton('line', 'line')
         let newContainer = this.configContainer.getWithProperties([
@@ -67,10 +56,10 @@ export default class ActionButtonFactory
             ConfigItem.ROUND_CAP_PROPERTY,
         ])
 
-        return new LineButton(button, this.canvas, newContainer, this.configPanel)
+        return new DrawActionButton(button, this.canvas, newContainer, this.configPanel, new LineStrategy())
     }
 
-    public createRectangleButton(): RectangleButton
+    public createRectangleButton(): DrawActionButton
     {
         let button = HTMLElementFactory.createActionButton('rectangle', 'rectangle')
         let newContainer = this.configContainer.getWithProperties([
@@ -80,10 +69,10 @@ export default class ActionButtonFactory
             ConfigItem.CONTOUR_PROPERTY,
         ])
 
-        return new RectangleButton(button, this.canvas, newContainer, this.configPanel)
+        return new DrawActionButton(button, this.canvas, newContainer, this.configPanel, new RectangleStrategy())
     }
 
-    public createCircleButton(): CircleButton
+    public createCircleButton(): DrawActionButton
     {
         let button = HTMLElementFactory.createActionButton('circle', 'circle')
         let newContainer = this.configContainer.getWithProperties([
@@ -93,10 +82,10 @@ export default class ActionButtonFactory
             ConfigItem.CONTOUR_PROPERTY,
         ])
 
-        return new CircleButton(button, this.canvas, newContainer, this.configPanel)
+        return new DrawActionButton(button, this.canvas, newContainer, this.configPanel, new CircleStrategy())
     }
 
-    public createBrushButton(): BrushButton
+    public createBrushButton(): DrawActionButton
     {
         let button = HTMLElementFactory.createActionButton('brush', 'brush')
         let newContainer = this.configContainer.getWithProperties([
@@ -107,10 +96,10 @@ export default class ActionButtonFactory
             ConfigItem.ELEMENT_DIAMETER_PROPERTY,
         ])
 
-        return new BrushButton(button, this.canvas, newContainer, this.configPanel)
+        return new DrawActionButton(button, this.canvas, newContainer, this.configPanel, new BrushStrategy())
     }
 
-    public createRectangleBrushButton(): RectangleBrushButton
+    public createRectangleBrushButton(): DrawActionButton
     {
         let button = HTMLElementFactory.createActionButton('rectangle brush', 'rectangle brush')
         let newContainer = this.configContainer.getWithProperties([
@@ -128,10 +117,10 @@ export default class ActionButtonFactory
             ConfigItem.ELEMENT_RANDOM_BLUE_COLOR_SPREAD_PROPERTY,
         ])
 
-        return new RectangleBrushButton(button, this.canvas, newContainer, this.configPanel)
+        return new DrawActionButton(button, this.canvas, newContainer, this.configPanel, new RectangleBrushStrategy())
     }
 
-    public createPolygonBrushButton(): PolygonBrushButton
+    public createPolygonBrushButton(): DrawActionButton
     {
         let button = HTMLElementFactory.createActionButton('polygon brush', 'polygon brush')
         let newContainer = this.configContainer.getWithProperties([
@@ -149,10 +138,10 @@ export default class ActionButtonFactory
             ConfigItem.ELEMENT_RANDOM_BLUE_COLOR_SPREAD_PROPERTY,
         ])
 
-        return new PolygonBrushButton(button, this.canvas, newContainer, this.configPanel)
+        return new DrawActionButton(button, this.canvas, newContainer, this.configPanel, new PolygonBrushStrategy())
     }
 
-    public createRotatingPencilButton(): RotatingPencilButton
+    public createRotatingPencilButton(): DrawActionButton
     {
         let button = HTMLElementFactory.createActionButton('rotating pencil', 'rotating pencil')
         let newContainer = this.configContainer.getWithProperties([
@@ -164,10 +153,10 @@ export default class ActionButtonFactory
             ConfigItem.ELEMENT_LAPS_PER_SECOND_PROPERTY,
         ])
 
-        return new RotatingPencilButton(button, this.canvas, newContainer, this.configPanel)
+        return new DrawActionButton(button, this.canvas, newContainer, this.configPanel, new RotatingPencilStrategy())
     }
 
-    public createBungeePencilButton(): BungeePencilButton
+    public createBungeePencilButton(): DrawActionButton
     {
         let button = HTMLElementFactory.createActionButton('bungee pencil', 'bungee pencil')
         let newContainer = this.configContainer.getWithProperties([
@@ -180,10 +169,10 @@ export default class ActionButtonFactory
             ConfigItem.STRIPE_GAP_LENGTH_PROPERTY,
         ])
 
-        return new BungeePencilButton(button, this.canvas, newContainer, this.configPanel)
+        return new DrawActionButton(button, this.canvas, newContainer, this.configPanel, new BungeePencilStrategy())
     }
 
-    public createAdvancedPencilButton(): AdvancedPencilButton
+    public createAdvancedPencilButton(): DrawActionButton
     {
         let button = HTMLElementFactory.createActionButton('advanced pencil', 'advanced pencil')
         let newContainer = this.configContainer.getWithProperties([
@@ -197,10 +186,10 @@ export default class ActionButtonFactory
             ConfigItem.OPACITY_FUNCTION_PROPERTY,
         ])
 
-        return new AdvancedPencilButton(button, this.canvas, newContainer, this.configPanel)
+        return new DrawActionButton(button, this.canvas, newContainer, this.configPanel, new AdvancedPencilStrategy())
     }
 
-    public createAdvancedPolygonBrushButton(): AdvancedPolygonBrushButton
+    public createAdvancedPolygonBrushButton(): DrawActionButton
     {
         let button = HTMLElementFactory.createActionButton('advanced polygon brush', 'advanced polygon brush')
         let newContainer = this.configContainer.getWithProperties([
@@ -221,7 +210,7 @@ export default class ActionButtonFactory
             ConfigItem.ELEMENT_ROTATION_FUNCTION_PROPERTY,
         ])
 
-        return new AdvancedPolygonBrushButton(button, this.canvas, newContainer, this.configPanel)
+        return new DrawActionButton(button, this.canvas, newContainer, this.configPanel, new AdvancedPolygonBrushStrategy())
     }
 
     public createImportButton(): ImportButton
