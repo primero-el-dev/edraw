@@ -11,6 +11,7 @@ import EastResizer from "./Element/Resizer/EastResizer.js";
 import SouthEastResizer from "./Element/Resizer/SouthEastResizer.js";
 import Resizer from "./Element/Resizer/Resizer.js";
 import ResizeUpInterface from "./Element/ResizeUpInterface.js";
+import HTMLAttributeDictionary from "./Element/HTMLAttributeDistionary.js";
 
 function getByIdOrThrowError(elementId: string): HTMLElement
 {
@@ -23,6 +24,24 @@ function getByIdOrThrowError(elementId: string): HTMLElement
 }
 
 try {
+    if (localStorage.getItem('cookie_info_displayed') !== '1') {
+        const cookieModal = document.createElement('div')
+        cookieModal.setAttribute('id', 'storageInfoModal')
+        const paragraph = document.createElement('p')
+        paragraph.innerText = 'This website uses local storage to store your drawing configuration and to check if this message was displayed.'
+        const close = document.createElement('span')
+        close.innerHTML = '&times;'
+        cookieModal.appendChild(paragraph)
+        cookieModal.appendChild(close)
+
+        close.onclick = () => {
+            cookieModal.classList.add(HTMLAttributeDictionary.DISPLAY_NONE_CLASS)
+            localStorage.setItem('cookie_info_displayed', '1')
+        }
+
+        document.body.appendChild(cookieModal)
+    }
+
     const canvasContainer = getByIdOrThrowError('canvasContainer')
     const buttonPanel = getByIdOrThrowError('buttonPanel')
     const mainCanvas = getByIdOrThrowError('mainCanvas') as HTMLCanvasElement
