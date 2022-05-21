@@ -72,4 +72,23 @@ export default class HTMLElementFactory
             + '</div>'
         )
     }
+
+    public static createCookieModal(storage: Storage, key: string): HTMLElement
+    {
+        const cookieModal = document.createElement('div')
+        cookieModal.setAttribute('id', 'storageInfoModal')
+        const paragraph = document.createElement('p')
+        paragraph.innerText = 'This website uses local storage to store your drawing configuration and to check if this message was displayed.'
+        const close = document.createElement('span')
+        close.innerHTML = '&times;'
+        cookieModal.appendChild(paragraph)
+        cookieModal.appendChild(close)
+
+        close.onclick = () => {
+            cookieModal.classList.add(HTMLAttributeDictionary.DISPLAY_NONE_CLASS)
+            storage.setItem(key, '1')
+        }
+
+        return cookieModal
+    }
 }
