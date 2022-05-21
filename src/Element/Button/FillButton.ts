@@ -1,5 +1,4 @@
 import DrawActionButton from "./DrawActionButton.js";
-import ConfigItem from "../../Config/ConfigItem.js";
 
 export default class FillButton extends DrawActionButton
 {
